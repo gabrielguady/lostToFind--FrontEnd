@@ -7,15 +7,16 @@ import {LoginComponent} from '../base/register/login/login.component';
 import {SignupComponent} from '../base/register/signup/signup.component';
 import {MyitemsComponent} from '../base/myitems/myitems.component';
 import {AddPhotoComponent} from '../base/add-photo-lost/add-photo.component';
+import {AuthGuardService} from '../shared/services/auth-guard.service';
 
 export const routes: Routes = [
 
   {path:'lost_item', component: LostItemListComponent},
   {path:'found_item', component: FoundItemListComponent},
-  {path: 'lost_item/:action', component: LostItemCreateComponent},
-  {path: 'found_item/:action', component: FoundItemCreateComponent},
+  {path: 'lost_item/:action', component: LostItemCreateComponent, canActivate: [AuthGuardService]},
+  {path: 'found_item/:action', component: FoundItemCreateComponent, canActivate: [AuthGuardService]},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
-  {path: 'my_items', component: MyitemsComponent},
+  {path: 'my_items', component: MyitemsComponent, canActivate: [AuthGuardService]},
   {path: 'photo', component: AddPhotoComponent}
 ];

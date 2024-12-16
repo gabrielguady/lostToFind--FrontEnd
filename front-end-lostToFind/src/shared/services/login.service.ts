@@ -9,9 +9,12 @@ import {User} from '../models/accounts';
   providedIn: 'root'
 })
 export class LoginService {
-  private apiUrl = 'http://localhost:8000/'; // URL da API do Django
+  private apiUrl = 'http://localhost:8000/';
 
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient) {
+  }
+
   get headers(): HttpHeaders {
     const access = sessionStorage.getItem('access');
 
@@ -26,7 +29,7 @@ export class LoginService {
 
   signup(username: string, email: string, password: string): Observable<loginResponse> {
     return this.http.post<loginResponse>(`${this.apiUrl}api/core/signup/`, {username, email, password}).pipe(
-      tap(( value) => {
+      tap((value) => {
         sessionStorage.setItem("access", value.access)
       })
     )
@@ -36,14 +39,12 @@ export class LoginService {
     return this.http.post<loginResponse>(`${this.apiUrl}token/`, {username, password}, {withCredentials: true}
     ).pipe(
       tap((value) => {
-        console.log('Token recebido:', value.access);
-
-        // Armazene o access no sessionStorage
         sessionStorage.setItem('access', value.access);
         sessionStorage.setItem('refresh', value.refresh);
       })
     );
   }
+
 
   get user(): User | null {
     const access = sessionStorage.getItem('access');
@@ -87,15 +88,16 @@ export class LoginService {
     return sessionStorage.getItem('access');
 
   }
+
   public isAuthenticated(): boolean {
     const access = this.getToken();
     return access !== null;
   }
 
   public logout(): void {
-      sessionStorage.removeItem('access');
-      sessionStorage.removeItem('refresh');
-      console.log('Usuário desconectado.');
+    sessionStorage.removeItem('access');
+    sessionStorage.removeItem('refresh');
+    console.log('Usuário desconectado.');
   }
 
   private handleError(error: any): Observable<any> {

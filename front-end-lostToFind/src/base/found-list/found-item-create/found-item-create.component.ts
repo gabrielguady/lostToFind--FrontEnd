@@ -13,7 +13,6 @@ import {MatOption, provideNativeDateAdapter} from '@angular/material/core';
 import {MatSelect} from '@angular/material/select';
 import {NgIf} from '@angular/common';
 import {AddPhotoComponent} from '../../add-photo-found/add-photo-found.component';
-
 @Component({
   selector: 'app-found-item-create',
   standalone: true,
@@ -52,6 +51,7 @@ export class FoundItemCreateComponent extends BaseComponent<FoundItem> implement
     {value: 5, label: 'Pets'},
     {value: 6, label: 'Outros'},
   ];
+  public isButtonVisible = true;
 
   constructor(private http: HttpClient) {
     super(http, URLS.FOUND_ITEM)
@@ -77,7 +77,9 @@ export class FoundItemCreateComponent extends BaseComponent<FoundItem> implement
       });
       this.service.save(this.object).subscribe((response: FoundItem) => {
         this.object = response;
+        this.isButtonVisible = false;
       })
+    } else {
     }
 
   }

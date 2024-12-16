@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 @import 'primeflex/primeflex';
+@import 'ngx-toastr/toastr';
 
 $theme: mat.define-theme((
   color: (

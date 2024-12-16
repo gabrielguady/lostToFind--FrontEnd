@@ -4,6 +4,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {NgClass, NgIf} from '@angular/common';
 import {LoginService} from '../shared/services/login.service';
+import {jwtDecode} from 'jwt-decode';
 
 interface Menu {
   title: string;
@@ -59,4 +60,5 @@ export class AppComponent {
     sessionStorage.removeItem('access');
     sessionStorage.removeItem('refresh');
   }
+
 }

@@ -1,24 +1,33 @@
-<h1>Recente itens perdidos</h1>
+<h1>meus itens</h1>
 <div class="flex flex-column gap-1">
   <div class="flex gap-3">
-    <mat-form-field>
-      <mat-label>Pesquisar titulo</mat-label>
-      <input matInput [(ngModel)]="searchName">
-    </mat-form-field>
-
-    <button mat-fab (click)="goToPage('lost_item/create')" class="btn-default">
-      <mat-icon>add</mat-icon>
+    <button mat-raised-button (click)="goToPage('lost_item/:create')" class="btn-default">
+      postar item perdido<mat-icon>add</mat-icon>
+    </button>
+    <button mat-raised-button (click)="goToPage('found_item/:create')" class="btn-default">
+      postar item achado<mat-icon>add</mat-icon>
     </button>
 
   </div>
 
-
-  <div class="row" >
-    @for (items of dataSource; track items.title) {
+  <div class="row">
+    @for (items of datalostItems; track items.title) {
+      @if (!items.is_resolved){
       <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+
         <mat-card class="cardWithShadow items overflow-hidden">
           <a routerLink="/found_item">
-            <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="imgSrc" class="w-100" mat-card-image />
+            @if (itemImages[items.id]?.length > 0){
+              <img [src]="itemImages[items.id][0]?.remote_name"
+                   alt="Image for {{ items.title }}"
+                   class="banner-image bg-no-repeat bg-primary-100 bg-center w-19rem h-19rem bg-primary border-2 border-transparent" mat-card-image />
+            } @else {
+              <img loading="lazy"
+                   src='{{imageAddress}}'
+                   class="banner-image bg-no-repeat bg-primary-100 bg-center w-19rem h-19rem bg-primary border-2 border-transparent"
+                   alt="Hero banner showcasing main content"
+                   tabindex="0" />
+            }
           </a>
           <mat-card-content class="p-b-24 p-t-12 position-relative">
             <mat-card-title class="mat-headline-2 f-s-16 m-b-4">
@@ -26,23 +35,85 @@
             </mat-card-title>
             <div class="d-flex align-items-center justify-content-between">
               <div class="d-flex align-items-center">
-              </div>
-              <div class=" flex-grow-1 gap-4">
+                <h3 class="mat-body-2 f-w-600">{{ items.city }}</h3>
+                <h5 class="mat-body-2 f-w-600"> {{ items.date_lost | date:'shortDate' }}</h5>
+                <mat-card-subtitle class="f-s-14 m-l-4">{{ items.last_seen_details }}</mat-card-subtitle>
               </div>
             </div>
-            <button mat-raised-button class="w-400 " matTooltip="meu item" (click)="goToPage('login')">
-              Item lost
-            </button>
+            <div>
+              <button mat-raised-button class="w-400 " matTooltip="meu item" (click)="goToPage('login')">
+                Item lost
+              </button>
+              <button mat-raised-button class="w-400" matTooltip="delete" (click)="deleteObjectLost(items.id)">
+                delete <mat-icon>delete</mat-icon>
+              </button>
+            </div>
           </mat-card-content>
         </mat-card>
+
       </div>
+    }
     }
   </div>
 
   @if (dataSource.length === 0 && datalostItems.length === 0) {
     <div class="flex flex-center">
-      <h2>Nenhum Item encontrado</h2>
+      <h2>Nenhum Item Perdido cadastrado</h2>
     </div>
   }
+
+  <div class="row">
+    @for (items of dataSource; track items.title) {
+      @if (!items.is_resolved){
+        <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+
+          <mat-card class="cardWithShadow items overflow-hidden">
+            <a routerLink="/found_item">
+              @if (itemImages[items.id]?.length > 0){
+                <img [src]="itemImages[items.id][0]?.remote_name"
+                     alt="Image for {{ items.title }}"
+                     class="banner-image bg-no-repeat bg-primary-100 bg-center w-19rem h-19rem bg-primary border-2 border-transparent" mat-card-image />
+              } @else {
+                <img loading="lazy"
+                     src='{{imageAddress}}'
+                     class="banner-image bg-no-repeat bg-primary-100 bg-center w-19rem h-19rem bg-primary border-2 border-transparent"
+                     alt="Hero banner showcasing main content"
+                     tabindex="0" />
+              }
+            </a>
+            <mat-card-content class="p-b-24 p-t-12 position-relative">
+              <mat-card-title class="mat-headline-2 f-s-16 m-b-4">
+                {{ items.title }}
+              </mat-card-title>
+              <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                  <h3 class="mat-body-2 f-w-600">{{ items.city }}</h3>
+                  <h5 class="mat-body-2 f-w-600"> {{ items.date_found | date:'shortDate' }}</h5>
+                  <mat-card-subtitle class="f-s-14 m-l-4">{{ items.description }}</mat-card-subtitle>
+                </div>
+              </div>
+              <div>
+                <button mat-raised-button class="w-400 " matTooltip="meu item" (click)="goToPage('login')">
+                  Item Found
+                </button>
+                <button mat-raised-button class="w-400" matTooltip="delete" (click)="deleteObjectFound(items.id)">
+                  delete <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+        </div>
+      }
+    }
+  </div>
+
+  @if (dataSource.length === 0 && datalostItems.length === 0) {
+    <div class="flex flex-center">
+      <h2>Nenhum Item achado cadastrado</h2>
+    </div>
+  }
+
 </div>
+
 

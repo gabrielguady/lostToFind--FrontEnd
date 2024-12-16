@@ -4,7 +4,7 @@
 
 .hero-image {
   aspect-ratio: 0; /* Você pode manter ou ajustar essa proporção conforme necessário */
-  object-fit: fill; /* Garante que a imagem cubra a área sem distorcer */
+  object-fit: cover; /* Garante que a imagem cubra a área sem distorcer */
   object-position: center; /* Centraliza a imagem */
   width: 100%; /* A largura será 100% do contêiner */
   height: 70vh; /* Ajuste para 70% da altura da tela (faça conforme necessário) */

@@ -19,9 +19,6 @@
       <mat-icon>search</mat-icon>
     </button>
 
-    <button mat-fab (click)="goToPage('lost_item/create')" class="btn-default">
-      <mat-icon>add</mat-icon>
-    </button>
   </div>
 
   <div class="row">
@@ -29,7 +26,17 @@
       @for (items of dataSource; track items.title) {
         <mat-card class="cardWithShadow items">
           <a routerLink="/found_item">
-            <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="imgSrc" class="w-100" mat-card-image />
+            @if (itemImages[items.id]?.length > 0){
+            <img [src]="itemImages[items.id][0]?.remote_name"
+                 alt="Image for {{ items.title }}"
+                 class="banner-image bg-no-repeat bg-primary-100 bg-center w-19rem h-19rem bg-primary border-2 border-transparent" mat-card-image />
+          } @else {
+            <img loading="lazy"
+                 src='{{imageAddress}}'
+                 class="banner-image bg-no-repeat bg-primary-100 bg-center w-19rem h-19rem bg-primary border-2 border-transparent"
+                 alt="Hero banner showcasing main content"
+                 tabindex="0" />
+          }
           </a>
           <mat-card-content class="p-b-24 p-t-12 position-relative">
             <mat-card-title class="mat-headline-2 f-s-16 m-b-4">
@@ -39,13 +46,13 @@
               <div class="d-flex align-items-center">
                 <h3 class="mat-body-2 f-w-600">{{ items.city }}</h3>
                 <h5 class="mat-body-2 f-w-600"> {{ items.date_lost | date:'shortDate' }}</h5>
-                <span class="f-s-14 m-l-4">{{ items.last_seen_details }}</span>
+                <mat-card-subtitle class="f-s-14 m-l-4">{{ items.last_seen_details }}</mat-card-subtitle>
               </div>
               <div class=" flex-grow-1 gap-4">
               </div>
             </div>
             <button mat-raised-button class="w-100" matTooltip="meu item" (click)="goToPage('photo')">
-              Item lost
+              achei seu item
             </button>
           </mat-card-content>
         </mat-card>

@@ -28,7 +28,9 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/primeflex/primeflex.css"
+              "node_modules/primeflex/primeflex.css",
+              "node_modules/toastr/build/toastr.min.css"
+
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -92,7 +94,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/primeflex/primeflex.css"
+              "node_modules/primeflex/primeflex.css",
+              "node_modules/toastr/build/toastr.min.css"
             ],
             "scripts": []
           }

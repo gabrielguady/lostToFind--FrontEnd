@@ -13,7 +13,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import {MatTooltip} from '@angular/material/tooltip';
 import {DatePipe, NgIf} from '@angular/common';
-import {LoginService} from '../../shared/services/login.service';
 
 @Component({
   selector: 'app-item-found-list',
@@ -41,6 +40,7 @@ export class FoundItemListComponent implements OnInit {
   public searchCity: string='';
   public searchDescription: string =  '';
   public itemImages: { [key: number]: any[] } = {};
+  public imageAdress: string = 'https://camo.githubusercontent.com/e7260310f5d1a8a9473a908e039f348a459078b0ba1876d12fbe0a26c8a0e1a7/68747470733a2f2f7a7562652e696f2f66696c65732f706f722d756d612d626f612d63617573612f33363664616462316461323032353338616531333332396261333464393030362d696d6167652e706e67';
 
 
   private router: Router = new Router();
@@ -70,31 +70,30 @@ export class FoundItemListComponent implements OnInit {
       }
     });
   }
-  public deleteObject(id:number): void {
-    this.service.delete(id).subscribe({
-      next: (_) => {
-        this.search()
-      },
-      error: (error) => {
-        console.error('error delete Found Item: ');
-      }
-    })
-  }
-  // Função para carregar imagens associadas a cada FoundItem
+  // public deleteObject(id:number): void {
+  //   this.service.delete(id).subscribe({
+  //     next: (_) => {
+  //       this.search()
+  //     },
+  //     error: (error) => {
+  //       console.error('error delete Found Item: ');
+  //     }
+  //   })
+  // }
+
   private loadImagesForItems(): void {
     this.dataSource.forEach(item => {
       this.loadImages(item.id);
     });
   }
 
-  // Função para fazer a requisição das imagens associadas ao FoundItem
+
   private loadImages(itemId: number): void {
-    // Aqui você faz uma requisição para o endpoint que retorna as imagens
+
     this.http.get<any[]>(`${URLS.BASE}api/core/file_image/?item_id=${itemId}&item_type=found`).subscribe({
       next: (images) => {
-        console.log('URL da requisição:', `${URLS.FILE_IMAGE}?item_id=${itemId}&item_type=found`);
 
-        this.itemImages[itemId] = images;  // Associa as imagens ao item com o id
+        this.itemImages[itemId] = images;
       },
       error: (error) => {
         console.error('Error loading images: ', error);

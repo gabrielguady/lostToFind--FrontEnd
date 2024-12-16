@@ -36,13 +36,14 @@
         <mat-error>Campo Inválido</mat-error>
       </mat-form-field>
     </div>
+    @if (isButtonVisible){
+      <button mat-flat-button class="btn-default" id="save" type="submit"
+              (click)="saveOrUpdate()"
+              [disabled]="!formGroup.valid">
+        Salvar Item perdido
 
-    <button mat-flat-button class="btn-default" id="save" type="submit"
-            (click)="saveOrUpdate()"
-            [disabled]="!formGroup.valid">
-      Salvar Item perdido
-
-    </button>
+      </button>
+    }
   </form>
   <app-add-photo-found *ngIf="itemIdEmitter" [id_item_found]="this.object.id"></app-add-photo-found>
 

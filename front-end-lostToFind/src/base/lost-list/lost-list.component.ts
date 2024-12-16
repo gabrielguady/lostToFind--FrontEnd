@@ -39,6 +39,8 @@ export class LostItemListComponent implements OnInit {
   public searchTitle: string = '';
   public searchLastSeen: string =  '';
   public searchCity: string = '';
+  public itemImages: { [key: number]: any[] } = {};
+  public imageAddress: string = 'https://camo.githubusercontent.com/e7260310f5d1a8a9473a908e039f348a459078b0ba1876d12fbe0a26c8a0e1a7/68747470733a2f2f7a7562652e696f2f66696c65732f706f722d756d612d626f612d63617573612f33363664616462316461323032353338616531333332396261333464393030362d696d6167652e706e67';
 
   private router: Router = new Router();
 
@@ -62,6 +64,7 @@ export class LostItemListComponent implements OnInit {
     this.service.getAll().subscribe({
       next: (data: LostItem[]) => {
         this.dataSource = data;
+        this.loadImagesForItems();
       },
       error: (error) => {
         console.error('error loading Lost Item: ');
@@ -88,6 +91,26 @@ export class LostItemListComponent implements OnInit {
   //   // Adiciona o script ao body ou a div onde você quer que ele seja carregado
   //   document.body.appendChild(script);
   // }
+
+  private loadImagesForItems(): void {
+    this.dataSource.forEach(item => {
+      this.loadImages(item.id);
+    });
+  }
+
+
+  private loadImages(itemId: number): void {
+
+    this.http.get<any[]>(`${URLS.BASE}api/core/file_image/?item_id=${itemId}&item_type=found`).subscribe({
+      next: (images) => {
+
+        this.itemImages[itemId] = images;
+      },
+      error: (error) => {
+        console.error('Error loading images: ', error);
+      }
+    });
+  }
 
 
 }
