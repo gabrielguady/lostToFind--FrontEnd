@@ -1,0 +1,17 @@
+.signup-form {
+  display: flex;
+  margin-top: 40px;
+  width: 100%;
+  flex-direction: column;
+  font-size: 20px;
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: center;
+}
+.forgot-pass{
+  font-size: 14px;
+  text-decoration: underline;
+  color: #FFFFFF;
+  text-align: end;
+}
+

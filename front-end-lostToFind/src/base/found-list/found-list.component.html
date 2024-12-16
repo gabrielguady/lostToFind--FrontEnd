@@ -1,0 +1,63 @@
+<h1>Recente itens achados</h1>
+<div class="flex flex-column gap-1">
+  <div class="flex gap-3">
+    <mat-form-field> <!-- Formulario -->
+      <mat-label>Pesquisar Nome</mat-label>
+      <input matInput [(ngModel)]="searchName">
+    </mat-form-field>
+    <mat-form-field> <!-- Formulario -->
+      <mat-label>Pesquisar descriçao</mat-label>
+      <input matInput [(ngModel)]="searchDescription">
+    </mat-form-field>
+    <mat-form-field> <!-- Formulario -->
+      <mat-label>Pesquisar cidade</mat-label>
+      <input matInput [(ngModel)]="searchCity">
+    </mat-form-field>
+
+    <button mat-fab (click)="search()" class="btn-default">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button mat-fab (click)="goToPage('found_item/:action')" class="btn-default">
+      <mat-icon>add</mat-icon>
+    </button>
+
+  </div>
+
+  <div class="row" >
+    @for (items of dataSource; track items.title) {
+      <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+        <mat-card class="cardWithShadow items overflow-hidden">
+          <a routerLink="/found_item">
+            <img *ngIf="itemImages[items.id]?.length > 0"
+                 [src]="itemImages[items.id][0]?.remote_name"
+                 alt="Image for {{ items.title }}"
+                 class="img-fluid" mat-card-image />
+          </a>
+          <mat-card-content class="p-b-24 p-t-12 position-relative">
+            <mat-card-title class="mat-headline-2 f-s-16 m-b-4">
+              {{ items.title }}
+            </mat-card-title>
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+                <h5 class="mat-body-2 f-w-600">{{ items.city }}</h5>
+                <h5 class="mat-body-2 f-w-600">{{ items.date_found | date:'shortDate' }}</h5>
+                <span class="f-s-14 m-l-4 ">{{ items.description }}</span>
+              </div>
+              <div class=" flex-grow-1 gap-4">
+              </div>
+            </div>
+            <button mat-raised-button class="flex-row-reverse " matTooltip="meu item" (click)="goToPage('itemFound/'+ items.id)">
+              Item lost
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    }
+  </div>
+
+  @if (dataSource.length === 0) {
+    <div class="flex flex-center">
+      <h2>Nenhum Item encontrado</h2>
+    </div>
+  }
+</div>

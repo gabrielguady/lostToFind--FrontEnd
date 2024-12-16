@@ -1,0 +1,22 @@
+table {
+  width: 100%;
+  .mat-mdc-header-cell {
+    font-weight: bold;
+    background: black;
+    color: white;
+  }
+}
+
+.mat-mdc-form-field {
+  width: 30%;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+
+}
+.mat-raised-button {
+  background-color: #C0FFCF;
+  color: #000;
+}

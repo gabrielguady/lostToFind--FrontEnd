@@ -1,0 +1,48 @@
+<h1>Recente itens perdidos</h1>
+<div class="flex flex-column gap-1">
+  <div class="flex gap-3">
+    <mat-form-field>
+      <mat-label>Pesquisar titulo</mat-label>
+      <input matInput [(ngModel)]="searchName">
+    </mat-form-field>
+
+    <button mat-fab (click)="goToPage('lost_item/create')" class="btn-default">
+      <mat-icon>add</mat-icon>
+    </button>
+
+  </div>
+
+
+  <div class="row" >
+    @for (items of dataSource; track items.title) {
+      <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+        <mat-card class="cardWithShadow items overflow-hidden">
+          <a routerLink="/found_item">
+            <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="imgSrc" class="w-100" mat-card-image />
+          </a>
+          <mat-card-content class="p-b-24 p-t-12 position-relative">
+            <mat-card-title class="mat-headline-2 f-s-16 m-b-4">
+              {{ items.title }}
+            </mat-card-title>
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="d-flex align-items-center">
+              </div>
+              <div class=" flex-grow-1 gap-4">
+              </div>
+            </div>
+            <button mat-raised-button class="w-400 " matTooltip="meu item" (click)="goToPage('login')">
+              Item lost
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    }
+  </div>
+
+  @if (dataSource.length === 0 && datalostItems.length === 0) {
+    <div class="flex flex-center">
+      <h2>Nenhum Item encontrado</h2>
+    </div>
+  }
+</div>
+

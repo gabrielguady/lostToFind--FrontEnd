@@ -1,0 +1,13 @@
+<div class="form-group">
+  <label [for]="inputName" class="form-label">{{ label }} </label>
+  <input
+    [type]="type"
+    [value]="value"
+    [placeholder]="placeholder"
+    (input)="onInput($event)"
+    class="form-input"
+    appAutofocus
+    required
+  />
+</div>
+

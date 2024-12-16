@@ -1,0 +1,39 @@
+
+
+<div class="row">
+  <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+    <mat-card class="cardWithShadow items overflow-hidden">
+      <a routerLink="/found_item">
+        @if(selectedImage){
+          <img
+            loading="lazy"
+            [src]="selectedImage"
+            class="hero-image"
+            alt="Hero banner showcasing our main product"
+            tabindex="0"
+          />
+        } @else {
+          <img
+            loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/1d612f75e08cb58e4c53e18b46581b33a9cbb09838f21578fb0f32ad9995d743?placeholderIfAbsent=true&apiKey=ce275dddc72e48378c03f0bdece66cd6"
+            class="hero-image"
+            alt="Hero banner showcasing our main product"
+            tabindex="0"
+          />
+        }
+      </a>
+      <mat-card-content class="p-b-24 p-t-12 position-relative">
+        <mat-card-title class="mat-headline-2 f-s-16 m-b-4">
+          Selecione uma imagem do item se possível!
+        </mat-card-title>
+        <input
+          type="file"
+          class="flex-row-reverse"
+          matTooltip="Selecione uma imagem"
+          (change)="onFileSelected($event)"
+        />
+        <button mat-flat-button class="flex-row-reverse" (click)="onSubmit()">salvar imagem</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

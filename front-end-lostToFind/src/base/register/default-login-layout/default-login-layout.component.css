@@ -1,0 +1,104 @@
+main{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background: #1C3489;
+  height: 100%;
+
+  .login-container {
+    display: flex;
+    max-width: 350px;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+    font-family: Montserrat, sans-serif;
+    color: #fff;
+    justify-content: center;
+    padding: 10px;
+  }
+  .brand-header {
+    display: flex;
+    align-items: start;
+    font-size: 40px;
+    font-weight: 900;
+    white-space: nowrap;
+    justify-content: start;
+    padding: 0 1px;
+  }
+  .brand-logo {
+    aspect-ratio: 2.14;
+    object-fit: contain;
+    object-position: center;
+    width: 105px;
+  }
+  .login-content {
+    display: flex;
+    margin-top: 52px;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  .login-title {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+  }
+  .login-button {
+    border-radius: 20px;
+    background-color: #fff;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 200px;
+    max-width: 100%;
+    color: #000;
+    padding: 13px 31px;
+    font: 500 22px Ubuntu, sans-serif;
+    border: none;
+    cursor: pointer;
+    align-self: center;
+  }
+  .divider{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: #FFFFFF;
+    flex-grow: 1;
+    font-weight: bold;
+  }
+  .signup-button {
+    border-radius: 20px;
+    background-color: #fff;
+    margin-top: 40px;
+    width: 200px;
+    max-width: 100%;
+    color: #000;
+    padding: 13px 31px;
+    border: none;
+    font: 500 22px Ubuntu, sans-serif;
+    cursor: pointer;
+    align-self: center;
+  }
+  .login-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  .image-section{
+  }
+
+  .lost-finder-text {
+    color: #FFFFFF;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    font-style: italic;
+    font-size: 18px;
+  }
+
+  .lost-finder-subtext {
+    display: block;
+    font-size: 30px;
+  }
+}

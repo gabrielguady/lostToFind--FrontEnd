@@ -1,0 +1,19 @@
+.form-group {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+.form-label {
+  align-self: start;
+  margin-bottom: 10px;
+}
+.form-input {
+  border-radius: 10px;
+  background-color: #fff;
+  min-height: 35px;
+  width: 100%;
+  border: none;
+  padding: 8px;
+  box-sizing: border-box;
+}
