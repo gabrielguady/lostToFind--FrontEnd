@@ -1,28 +1,51 @@
-<app-default-login-layout
-  title="login into your account"
-  primaryBtnText="Login Now"
-  secondaryBtnText="Signup Now"
-  (submit)="submit()"
-  (navigate)="navigate('signup')"
-  [isDisabled]="!loginForm.valid"
->
-  <form [formGroup]="loginForm" class="login-form">
-    <app-input-primary
-      id="username"
-      formControlName="username"
-      inputName="username"
-      type="text"
-      label="Username"
-      placeholder="seu usúario"
-    >
-    </app-input-primary>
-    <app-input-primary
-      formControlName="password"
-      inputName="password"
-      type="password"
-      label="Password"
-    >
-    </app-input-primary>
-  </form>
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
 
-</app-default-login-layout>
+<div class="login">
+  <app-default-login-layout
+    title="Entre na sua conta"
+    primaryBtnText="Login"
+    secondaryBtnText="Cadastrar"
+    (submit)="submit()"
+    (navigate)="navigate('signup')"
+    [isDisabled]="!loginForm.valid"
+  >
+
+    <form [formGroup]="loginForm" class="login-form">
+      <app-input-primary
+        id="email"
+        formControlName="email"
+        inputName="email"
+        type="email"
+        label="E-mail"
+        placeholder="seuemail@gmail.com"
+      >
+      </app-input-primary>
+
+      <app-input-primary
+        formControlName="password"
+        inputName="password"
+        type="password"
+        label="Senha"
+        placeholder="Digite sua senha"
+      >
+      </app-input-primary>
+    </form>
+  </app-default-login-layout>
+
+
+</div>
+
+
+</body>
+</html>
+
+

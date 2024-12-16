@@ -27,9 +27,9 @@ export class AppComponent {
 
   constructor() {
     this.menuList = [
-      {title: 'ITEM LOST', route: '/lost_item', isCurrent: false},
-      {title: 'ITEM FOUND', route: '/found_item', isCurrent: false},
-      {title: 'MY ITEMS', route: '/my_items', isCurrent: false},
+      {title: 'PERDIDOS', route: '/lost_item', isCurrent: false},
+      {title: 'ACHOS', route: '/found_item', isCurrent: false},
+      {title: 'MEUS ITENS', route: '/my_items', isCurrent: false},
     ];
     this.changeMenu(this.menuList[0]);
   }

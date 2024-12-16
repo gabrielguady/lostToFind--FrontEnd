@@ -1,0 +1,27 @@
+mat-form-field {
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+
+}
+
+.foundpage {
+  max-width: 700px; /* Define a largura máxima de 800px */
+  width: 100%; /* Garante que o contêiner ocupe toda a largura disponível */
+  margin: 0; /* Remove a margem para alinhamento à esquerda */
+  padding: 0 16px; /* Adiciona um pequeno padding, se necessário */
+}
+
+.container{
+  max-width: 400px;
+}
+
+
+
+.btn-default {
+  font-family: Montserrat, sans-serif;
+
+}
+
+
+

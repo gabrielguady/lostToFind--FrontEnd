@@ -1,7 +1,7 @@
 <app-default-login-layout
-  title="Signup into a new account!"
-  primaryBtnText="Signup Now"
-  secondaryBtnText="Login Now"
+  title="Cadastre aqui sua nova conta!"
+  primaryBtnText="Cadastrar"
+  secondaryBtnText="Entrar"
   (submit)="submit()"
   (navigate)="navigate('login')"
   [isDisabled]="!signupForm.valid"
@@ -11,7 +11,7 @@
       formControlName="username"
       inputName="username"
       type="text"
-      label="Username"
+      label="Usuário"
     >
     </app-input-primary>
     <app-input-primary
@@ -19,21 +19,21 @@
       inputName="email"
       type="email"
       label="E-mail"
-      placeholder="youremail@gmail.com"
+      placeholder="seuemail@gmail.com"
     >
     </app-input-primary>
     <app-input-primary
       formControlName="password"
       inputName="password"
       type="password"
-      label="Password"
+      label="Senha"
     >
     </app-input-primary>
     <app-input-primary
       formControlName="confirmPassword"
       inputName="confirmPassword"
       type="password"
-      label="Confirm Password"
+      label="Confirmar senha"
     >
     </app-input-primary>
   </form>

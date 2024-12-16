@@ -1,5 +1,5 @@
 <h1>Recente itens achados</h1>
-<div class="comtainer flex flex-column gap-1">
+<div class="flex flex-column gap-1">
   <div class="flex gap-3">
     <mat-form-field> <!-- Formulario -->
       <mat-label>Pesquisar Nome</mat-label>
@@ -17,25 +17,18 @@
     <button mat-fab (click)="search()" class="btn-default">
       <mat-icon>search</mat-icon>
     </button>
+    <button mat-fab (click)="goToPage('found_item/:action')" class="btn-default">
+      <mat-icon>add</mat-icon>
+    </button>
 
   </div>
 
   <div class="row" >
     @for (items of dataSource; track items.title) {
       <div class="col-6 col-sm-6 col-md-6 col-lg-6">
-        <mat-card class="cardWithShadow items overflow-hidden xl:max-w-min">
+        <mat-card class="cardWithShadow items overflow-hidden">
           <a routerLink="/found_item">
-            @if (itemImages[items.id]?.length > 0){
-              <img [src]="itemImages[items.id][0]?.remote_name"
-                   alt="Image for {{ items.title }}"
-                   class="banner-image bg-no-repeat bg-primary-100 bg-center w-19rem h-19rem bg-primary border-2 border-transparent" />
-            } @else {
-              <img loading="lazy"
-                   src='{{imageAdress}}'
-                   class="banner-image bg-no-repeat bg-primary-100 bg-center w-19rem h-19rem bg-primary border-2 border-transparent"
-                   alt="Hero banner showcasing main content"
-                   tabindex="0" />
-            }
+            <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="imgSrc" class="w-100" mat-card-image />
           </a>
           <mat-card-content class="p-b-24 p-t-12 position-relative">
             <mat-card-title class="mat-headline-2 f-s-16 m-b-4">
