@@ -1,6 +1,6 @@
 <div class="flex flex-column w-full h-full">
   <div class="flex flex-row align-items-center menu pl-6">
-      <mat-icon (click)="goToPage('found_item')" aria-hidden="false" class="mr-6 cursor-pointer" aria-label="Example home icon" fontIcon="home"></mat-icon>
+      <mat-icon (click)="reloadPage()" aria-hidden="false" class="mr-6 cursor-pointer" aria-label="Example home icon" fontIcon="home"></mat-icon>
     <h2 class="mr-6">LOST TO FIND</h2>
     @for (menu of menuList; track menu.route) {
       <button mat-button (click)="changeMenu(menu)" class="menu-btn uppercase mr-3"

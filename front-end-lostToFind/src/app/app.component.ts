@@ -60,5 +60,8 @@ export class AppComponent {
     sessionStorage.removeItem('access');
     sessionStorage.removeItem('refresh');
   }
+  reloadPage(): void {
+    window.location.reload();
+  }
 
 }

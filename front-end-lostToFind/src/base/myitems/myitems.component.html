@@ -56,7 +56,7 @@
     }
   </div>
 
-  @if (dataSource.length === 0 && datalostItems.length === 0) {
+  @if (datalostItems.length === 0) {
     <div class="flex flex-center">
       <h2>Nenhum Item Perdido cadastrado</h2>
     </div>
@@ -69,8 +69,8 @@
 
           <mat-card class="cardWithShadow items overflow-hidden">
             <a routerLink="/found_item">
-              @if (itemImages[items.id]?.length > 0){
-                <img [src]="itemImages[items.id][0]?.remote_name"
+              @if (itemImagesFound[items.id]?.length > 0){
+                <img [src]="itemImagesFound[items.id][0]?.remote_name"
                      alt="Image for {{ items.title }}"
                      class="banner-image bg-no-repeat bg-primary-100 bg-center w-19rem h-19rem bg-primary border-2 border-transparent" mat-card-image />
               } @else {

@@ -77,24 +77,28 @@ export class LostItemListComponent implements OnInit {
     this.router.navigate([route], extras).then();
   }
 
-  // addCommentScript(): void {
-  //   // Cria a tag <script> dinamicamente
-  //   const script = document.createElement('script');
-  //   script.src = 'https://utteranc.es/client.js';
-  //   script.setAttribute('repo', 'gabrielguady/LostToFind');
-  //   script.setAttribute('issue-term', 'pathname');
-  //   script.setAttribute('label', 'Comentários');
-  //   script.setAttribute('theme', 'github-light');
-  //   script.setAttribute('crossorigin', 'anonymous');
-  //   script.async = true;
-  //
-  //   // Adiciona o script ao body ou a div onde você quer que ele seja carregado
-  //   document.body.appendChild(script);
-  // }
+  addCommentScript(itemId: number): void {
+    // Cria a tag <script> dinamicamente
+    const script = document.createElement('script');
+    script.src = 'https://utteranc.es/client.js';
+    script.setAttribute('repo', 'gabrielguady/LostToFind');  // Repositório no GitHub
+    script.setAttribute('issue-term', `item-${itemId}`);  // Usando item.id como chave única para a "issue"
+    script.setAttribute('label', 'Comentários');
+    script.setAttribute('theme', 'github-light');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.async = true;
+
+    // Encontre o contêiner do item específico
+    const container = document.getElementById(`utterances-container-${itemId}`);
+    if (container) {
+      container.appendChild(script);  // Adiciona o script no contêiner correto
+    }
+  }
 
   private loadImagesForItems(): void {
     this.dataSource.forEach(item => {
       this.loadImages(item.id);
+      this.addCommentScript(item.id);
     });
   }
 
