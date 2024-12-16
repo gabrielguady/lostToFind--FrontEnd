@@ -1,0 +1,7 @@
+<div *ngIf="item; else loading">
+  <h2>{{ item.title }}</h2>
+  <p><strong>Descrição:</strong> {{ item.description }}</p>
+</div>
+<ng-template #loading>
+  <p>Carregando detalhes...</p>
+</ng-template>

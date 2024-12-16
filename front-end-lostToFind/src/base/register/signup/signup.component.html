@@ -1,0 +1,41 @@
+<app-default-login-layout
+  title="Signup into a new account!"
+  primaryBtnText="Signup Now"
+  secondaryBtnText="Login Now"
+  (submit)="submit()"
+  (navigate)="navigate('login')"
+  [isDisabled]="!signupForm.valid"
+>
+  <form [formGroup]="signupForm" class="signup-form">
+    <app-input-primary
+      formControlName="username"
+      inputName="username"
+      type="text"
+      label="Username"
+    >
+    </app-input-primary>
+    <app-input-primary
+      formControlName="email"
+      inputName="email"
+      type="email"
+      label="E-mail"
+      placeholder="youremail@gmail.com"
+    >
+    </app-input-primary>
+    <app-input-primary
+      formControlName="password"
+      inputName="password"
+      type="password"
+      label="Password"
+    >
+    </app-input-primary>
+    <app-input-primary
+      formControlName="confirmPassword"
+      inputName="confirmPassword"
+      type="password"
+      label="Confirm Password"
+    >
+    </app-input-primary>
+  </form>
+
+</app-default-login-layout>
