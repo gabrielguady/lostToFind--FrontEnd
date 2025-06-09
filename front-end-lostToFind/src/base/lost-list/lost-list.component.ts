@@ -13,6 +13,7 @@ import {LostItem} from '../../shared/models/lost-item';
 import {BaseService} from '../../shared/services/base.service';
 import {MatTooltip} from '@angular/material/tooltip';
 import {DatePipe} from '@angular/common';
+import {LoginService} from '../../shared/services/login.service';
 
 
 @Component({
@@ -46,9 +47,14 @@ export class LostItemListComponent implements OnInit {
 
   private parameters: HttpParams = new HttpParams();
 
-  constructor(private http: HttpClient , private datePipe: DatePipe) {
-    this.service =  new BaseService<LostItem>(http,URLS.LOST_ITEM)
+  constructor(
+    private http: HttpClient,
+    private loginService: LoginService,
+    private datePipe: DatePipe
+  ) {
+    this.service = new BaseService<LostItem>(http, URLS.LOST_ITEM, loginService);
   }
+
   ngOnInit(): void {
     this.search();
     // this.addCommentScript()

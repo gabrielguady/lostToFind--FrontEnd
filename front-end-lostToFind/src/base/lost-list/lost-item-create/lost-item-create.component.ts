@@ -31,10 +31,6 @@ import {AddPhotoComponent} from '../../add-photo-lost/add-photo.component';
     MatDatepickerToggle,
     MatSelect,
     MatOption,
-    MatCardContent,
-    MatCardTitle,
-    MatTooltip,
-    MatCard,
     NgIf,
     AddPhotoComponent,
   ],
@@ -56,6 +52,24 @@ export class LostItemCreateComponent extends BaseComponent<LostItem> implements 
     { value: 6, label: 'Outros' },
   ];
 
+  private formatDate(date: Date | string): string {
+    if (!date) return '';
+
+    // Se já for string, retorna ela mesma (assumindo que já esteja formatada)
+    if (typeof date === 'string') {
+      return date;
+    }
+
+    // Se for Date, formata no padrão dd/MM/yyyy HH:mm
+    const d = date.getDate().toString().padStart(2, '0');
+    const m = (date.getMonth() + 1).toString().padStart(2, '0');
+    const y = date.getFullYear();
+    const h = date.getHours().toString().padStart(2, '0');
+    const min = date.getMinutes().toString().padStart(2, '0');
+
+    return `${d}/${m}/${y} ${h}:${min}`;
+  }
+
 
   constructor(private http: HttpClient) {
     super(http,URLS.LOST_ITEM)
@@ -74,20 +88,34 @@ export class LostItemCreateComponent extends BaseComponent<LostItem> implements 
   }
 
 
-
   public saveOrUpdate(): void {
     if (this.formGroup.valid) {
       Object.keys(this.formGroup.controls).forEach(key => {
-        const value = this.formGroup.getRawValue()[key];
+        let value = this.formGroup.getRawValue()[key];
+
+        // Se for campo date_lost e for Date, formata para string no formato dd/MM/yyyy HH:mm
+        if (key === 'date_lost' && value) {
+          value = this.formatDate(value);
+        }
+
         if (value !== null && value !== undefined) {
           this.object[key] = value;
         }
       });
-      this.service.save(this.object).subscribe((response: LostItem ) => {
-        this.object = response;
-      })
-    }
 
+      this.service.save(this.object).subscribe({
+        next: (response: LostItem) => {
+          this.object = response;
+          console.log('Item salvo com sucesso:', response);
+          // Aqui você pode emitir eventos ou resetar o form se quiser
+        },
+        error: (err) => {
+          console.error('Erro ao salvar item:', err);
+        }
+      });
+    } else {
+      console.warn('Formulário inválido, corrija os erros.');
+    }
   }
 
 }

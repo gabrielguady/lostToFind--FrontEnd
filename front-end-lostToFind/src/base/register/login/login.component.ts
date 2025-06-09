@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AutofocusDirective} from '../../../shared/directives/auto-focus-directive';
-import {NavigationExtras, Router} from '@angular/router';
-import {LoginService} from '../../../shared/services/login.service';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AutofocusDirective } from '../../../shared/directives/auto-focus-directive';
+import { NavigationExtras, Router } from '@angular/router';
+import { LoginService } from '../../../shared/services/login.service';
+import { DefaultLoginLayoutComponent } from '../default-login-layout/default-login-layout.component';
 import {InputPrimaryComponent} from '../input-primary/input-primary.component';
-import {DefaultLoginLayoutComponent} from '../default-login-layout/default-login-layout.component';
 
 @Component({
   selector: 'app-login',
@@ -14,43 +14,54 @@ import {DefaultLoginLayoutComponent} from '../default-login-layout/default-login
     FormsModule,
     ReactiveFormsModule,
     InputPrimaryComponent,
-    AutofocusDirective,
-    InputPrimaryComponent,
-    DefaultLoginLayoutComponent,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
 
-  public loginForm! : FormGroup;
+  public loginForm!: FormGroup;
 
-  private router: Router = new Router();
-
-  constructor(private loginService: LoginService) {
-
-  }
+  constructor(
+    private loginService: LoginService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      email : new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required, Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    })
+    });
   }
 
-  submit(){
-    this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(
-      {
-        next: () => this.navigate('lost_item'),
-        error: () => console.log("error"),
-      }
-    )
-
+  submit() {
+    if (this.loginForm.valid) {
+      const { username, password } = this.loginForm.value;
+      this.loginService.login(username, password).subscribe({
+        next: () => {
+          const user = this.loginService.user;
+          console.log('Usuário logado:', user || 'não definido');
+          this.navigate('home');
+        },
+        error: (err) => {
+          console.error('Erro ao fazer login:', err);
+        }
+      });
+    }
   }
 
   public navigate(route: string): void {
-    const extras: NavigationExtras = {queryParamsHandling: 'merge'};
+    const extras: NavigationExtras = { queryParamsHandling: 'merge' };
     this.router.navigate([route], extras).then();
-    console.log(this.loginService.user)
   }
 }
+
+// submit(){
+//   this.loginService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(
+//     {
+//       next: () => this.navigate('lost_item'),
+//       error: () => console.log("error"),
+//     }
+//   )
+//
+// }

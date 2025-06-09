@@ -48,9 +48,14 @@ export class FoundItemListComponent implements OnInit {
   private service: BaseService<FoundItem>
   private parameters: HttpParams = new HttpParams();
 
-  constructor(private http: HttpClient, private datePipe: DatePipe) {
-    this.service =  new BaseService<FoundItem>(http,URLS.FOUND_ITEM)
+  constructor(
+    private http: HttpClient,
+    private datePipe: DatePipe,
+    private loginService: LoginService
+  ) {
+    this.service = new BaseService<FoundItem>(http, URLS.FOUND_ITEM, loginService);
   }
+
   ngOnInit(): void {
     this.search();
   }
@@ -80,14 +85,14 @@ export class FoundItemListComponent implements OnInit {
       }
     })
   }
-  // Função para carregar imagens associadas a cada FoundItem
+  // carregar imagens associadas a cada FoundItem
   private loadImagesForItems(): void {
     this.dataSource.forEach(item => {
       this.loadImages(item.id);
     });
   }
 
-  // Função para fazer a requisição das imagens associadas ao FoundItem
+  // fazer a requisição das imagens associadas ao FoundItem
   private loadImages(itemId: number): void {
     // Aqui você faz uma requisição para o endpoint que retorna as imagens
     this.http.get<any[]>(`${URLS.BASE}api/core/file_image/?item_id=${itemId}&item_type=found`).subscribe({

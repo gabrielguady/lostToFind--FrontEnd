@@ -7,9 +7,11 @@ import {LoginComponent} from '../base/register/login/login.component';
 import {SignupComponent} from '../base/register/signup/signup.component';
 import {MyitemsComponent} from '../base/myitems/myitems.component';
 import {AddPhotoComponent} from '../base/add-photo-lost/add-photo.component';
+import {HomeComponent} from '../base/home/home.component'
 
 export const routes: Routes = [
 
+  {path: 'home', component: HomeComponent},
   {path:'lost_item', component: LostItemListComponent},
   {path:'found_item', component: FoundItemListComponent},
   {path: 'lost_item/:action', component: LostItemCreateComponent},

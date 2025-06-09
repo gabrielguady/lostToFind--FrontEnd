@@ -1,4 +1,4 @@
-:host {
+  :host {
   display: block; /* Ou 'flex', dependendo da estrutura da sua aplicação */
 }
 
