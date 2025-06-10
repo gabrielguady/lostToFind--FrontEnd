@@ -1,12 +1,12 @@
 <header class="app-header">
   <div class="flex align-items-center gap-2 px-3 py-2">
     <span class="text-black font-bold text-xl">Lost to Find</span>
-    <img src="assets/logo.png" alt="Logo do Projeto" class="h-10">
+    <img src="logo.png" class="h-10">
   </div>
 </header>
 
-<div class="flex justify-content-center px-4 mt-5">
-  <div class="surface-card w-full md:w-11 lg:w-10 xl:w-9 p-5 shadow-3 border-round-xl">
+  <div class="flex justify-content-center px-4 mt-5">
+    <div class="surface-card w-full md:w-11 lg:w-10 xl:w-9 p-5 shadow-3 border-round-xl">
 
 <h1>Recente itens perdidos</h1>
 <div class="flex flex-column gap-1">
@@ -33,24 +33,24 @@
     </button>
   </div>
 
-  <div class="row">
-    <div class=" col-12 col-sm-6 col-md-4 col-lg-3">
+  <div class="row flex-justify-content-center">
+    <div class="flex-justify-content-center col-12 col-sm-6 col-md-4 col-lg-3">
       @for (items of dataSource; track items.title) {
         <mat-card class="cardWithShadow items">
           <a routerLink="/found_item">
-            <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="imgSrc" class="w-100" mat-card-image />
+            <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="imgSrc" class="justify-content-center w-60" mat-card-image />
           </a>
-          <mat-card-content class="p-b-24 p-t-12 position-relative">
+          <mat-card-content class="flex-justify-content-center p-b-24 p-t-12 position-relative">
             <mat-card-title class="mat-headline-2 f-s-16 m-b-4">
               {{ items.title }}
             </mat-card-title>
-            <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex flex-justify-content-center">
               <div class="d-flex align-items-center">
                 <h3 class="mat-body-2 f-w-600">{{ items.city }}</h3>
                 <h5 class="mat-body-2 f-w-600"> {{ items.date_lost | date:'shortDate' }}</h5>
                 <span class="f-s-14 m-l-4">{{ items.last_seen_details }}</span>
               </div>
-              <div class=" flex-grow-1 gap-4">
+              <div class="flex-justify-content-center flex-grow-1 gap-4">
               </div>
             </div>
             <button mat-raised-button class="w-100" matTooltip="meu item" (click)="goToPage('photo')">

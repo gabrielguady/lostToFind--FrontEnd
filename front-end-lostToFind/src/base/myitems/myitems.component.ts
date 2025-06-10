@@ -19,7 +19,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   selector: 'app-myitems',
   standalone: true,
   imports: [
-    DatePipe,
     MatButton,
     MatCard,
     MatCardContent,
@@ -73,6 +72,7 @@ export class MyitemsComponent implements OnInit {
       }
     });
   }
+
   public deleteObject(id:number): void {
     this.Foundservice.delete(id).subscribe({
       next: (_) => {
@@ -83,6 +83,7 @@ export class MyitemsComponent implements OnInit {
       }
     })
   }
+
   public searchLost(resetIndex: boolean = false): void {
     this.Lostservice.clearParameter();
     this.Foundservice.addParameter('title', this.searchName);
@@ -95,6 +96,7 @@ export class MyitemsComponent implements OnInit {
       }
     });
   }
+
   public deleteObjectLost(id:number): void {
     this.Lostservice.delete(id).subscribe({
       next: (_) => {

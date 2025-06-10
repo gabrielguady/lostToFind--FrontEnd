@@ -1,0 +1,40 @@
+.app-header {
+  /*position: fixed;*/
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  color: white;
+  background-color: #1C3489;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* pra sobrepor o sidenav */
+  display: flex;
+  align-items: center;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.lost-b {
+  color: #ffffff !important;
+  background-color: #142967;
+}
+
+.found-b {
+  color: #ffffff !important;
+  background-color: #142967;
+}
+
+.myitem-b {
+  color: #ffffff !important;
+  background-color: #142967;
+}
+
+
+
