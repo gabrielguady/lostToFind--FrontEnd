@@ -1,3 +1,14 @@
+
+<header class="app-header">
+  <div class="flex align-items-center gap-2 px-3 py-2">
+    <span class="text-black font-bold text-xl">Lost to Find</span>
+    <img src="/home/logo.png" class="h-4" />
+  </div>
+</header>
+
+<div class="flex justify-content-center px-4 mt-5">
+  <div class="surface-card w-full md:w-11 lg:w-10 xl:w-9 p-5 shadow-3 border-round-xl">
+
 <div class="flex flex-column gap-1">
   <h1>
     Cadastro de Item Perdido
@@ -50,4 +61,7 @@
   </form>
 
   <app-add-photo-lost *ngIf="itemIdEmitter" [id_item_lost]="this.object.id"></app-add-photo-lost>
+</div>
+
+  </div>
 </div>
