@@ -1,0 +1,180 @@
+.app-header {
+  /*position: fixed;*/
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  color: white;
+  background-color: #1C3489;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* pra sobrepor o sidenav */
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 24px;
+  width: auto;
+}
+
+
+.lost-b {
+  color: #ffffff !important;
+}
+
+.lost-b:hover {
+  color: #142967 !important;
+  background-color: #ffffff !important;
+}
+
+
+.selected .user{
+  color: #142967 !important;
+  background-color: #ffffff !important;
+  font-weight: bold;
+}
+
+.found-b {
+  color: #ffffff !important;
+}
+.found-b:hover {
+  color: #142967 !important;
+  background-color: #ffffff !important;
+}
+
+.myitem-b {
+  color: #ffffff !important;
+}
+.myitem-b:hover {
+  color: #142967 !important;
+  background-color: #ffffff !important;
+}
+
+.user {
+  color: #ffffff !important;
+}
+.user:hover {
+  color: #142967 !important;
+  background-color: #ffffff !important;
+}
+
+.logo-mask {
+  height: 37px;
+  width: 38.2px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-mask video {
+  height: 44px;
+  width: 40.8px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: -3.5px -3.5px;
+}
+
+.user-container {
+  padding: 2rem;
+  background-color: #f0f4f8;
+  min-height: 100vh;
+}
+
+.title-container {
+  justify-content: center;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1C3489;
+  margin-bottom: 0.25rem;
+
+}
+
+.page-subtitle {
+  color: #475569;
+  margin-bottom: 1.5rem;
+}
+
+.user-card {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background-color: #1C3489;
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.user-icon {
+  font-size: 5rem;         /* Aumenta o tamanho real do ícone */
+  width: auto;             /* Remove limitação de largura */
+  height: auto;            /* Remove limitação de altura */
+  line-height: 1;          /* Garante que o ícone não seja verticalmente cortado */
+  display: block;          /* Evita inline constraints */
+  color: #ffffff;
+  margin-bottom: 1rem;
+  margin-right: 1.5rem;
+}
+
+
+.user-info .user-name {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.user-info .user-member {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.user-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.user-form-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.user-form-grid .user-form-field {
+  flex: 1 1 48%;
+}
+
+.edit-button {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+  color: #ffffff;
+  background-color: #1C3489;
+}
+.edit-button:hover {
+  color: #1C3489;
+}
+
+.save-quit {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+  color: #ffffff;
+  background-color: #1C3489;
+}
+.save-quit:hover {
+  color: #1C3489;
+}
+
+.user-button {
+  margin-top: 1rem;
+}
