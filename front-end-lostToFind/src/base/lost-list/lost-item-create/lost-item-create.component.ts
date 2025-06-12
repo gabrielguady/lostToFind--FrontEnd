@@ -11,10 +11,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
 import {MatOption, provideNativeDateAdapter} from '@angular/material/core';
 import {MatSelect} from '@angular/material/select';
-import {MatCard, MatCardContent, MatCardTitle} from '@angular/material/card';
-import {MatTooltip} from '@angular/material/tooltip';
 import {NgIf} from '@angular/common';
 import {AddPhotoComponent} from '../../add-photo-lost/add-photo.component';
+import {MatIcon} from '@angular/material/icon';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-lost-item-create',
@@ -33,6 +33,8 @@ import {AddPhotoComponent} from '../../add-photo-lost/add-photo.component';
     MatOption,
     NgIf,
     AddPhotoComponent,
+    MatIcon,
+    RouterLink,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [provideNativeDateAdapter()],
@@ -55,20 +57,47 @@ export class LostItemCreateComponent extends BaseComponent<LostItem> implements 
   private formatDate(date: Date | string): string {
     if (!date) return '';
 
-    // Se já for string, retorna ela mesma (assumindo que já esteja formatada)
     if (typeof date === 'string') {
-      return date;
+      // Divide entre data e hora
+      const [datePart, timePart] = date.split(' ');
+
+      const dateParts = datePart.split('/');
+      if (dateParts.length === 3) {
+        const day = parseInt(dateParts[0], 10);
+        const month = parseInt(dateParts[1], 10) - 1;
+        const year = parseInt(dateParts[2], 10);
+
+        let hours = 0;
+        let minutes = 0;
+
+        if (timePart) {
+          const timeParts = timePart.split(':');
+          if (timeParts.length >= 1) {
+            hours = parseInt(timeParts[0], 10);
+          }
+          if (timeParts.length >= 2) {
+            minutes = parseInt(timeParts[1], 10);
+          }
+        }
+
+        const parsedDate = new Date(year, month, day, hours, minutes);
+        if (!isNaN(parsedDate.getTime())) {
+          return parsedDate.toISOString();
+        }
+      }
+
+      // Tenta converter com Date padrão como fallback
+      const fallback = new Date(date);
+      if (!isNaN(fallback.getTime())) {
+        return fallback.toISOString();
+      }
+
+      return ''; // inválido
     }
 
-    // Se for Date, formata no padrão dd/MM/yyyy HH:mm
-    const d = date.getDate().toString().padStart(2, '0');
-    const m = (date.getMonth() + 1).toString().padStart(2, '0');
-    const y = date.getFullYear();
-    const h = date.getHours().toString().padStart(2, '0');
-    const min = date.getMinutes().toString().padStart(2, '0');
-
-    return `${d}/${m}/${y} ${h}:${min}`;
+    return date.toISOString(); // já é um Date
   }
+
 
 
   constructor(private http: HttpClient) {

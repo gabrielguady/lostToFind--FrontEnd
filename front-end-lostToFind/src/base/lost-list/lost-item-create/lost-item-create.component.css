@@ -1,3 +1,4 @@
+
 .app-header {
   /*position: fixed;*/
   top: 0;
@@ -10,4 +11,57 @@
   z-index: 1000; /* pra sobrepor o sidenav */
   display: flex;
   align-items: center;
+}
+
+.lost-b {
+  color: #ffffff !important;
+}
+
+.lost-b:hover {
+  color: #142967 !important;
+  background-color: #ffffff !important;
+}
+
+.found-b {
+  color: #ffffff !important;
+}
+
+.found-b:hover {
+  color: #142967 !important;
+  background-color: #ffffff !important;
+}
+
+.myitem-b {
+  color: #ffffff !important;
+}
+
+.myitem-b:hover {
+  color: #142967 !important;
+  background-color: #ffffff !important;
+}
+
+.logo-mask {
+  height: 37px;
+  width: 38.2px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-mask video {
+  height: 44px;
+  width: 40.8px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: -3.5px -3.5px;
+}
+
+.user {
+  color: #ffffff !important;
+}
+.user:hover {
+  color: #142967 !important;
+  background-color: #ffffff !important;
 }

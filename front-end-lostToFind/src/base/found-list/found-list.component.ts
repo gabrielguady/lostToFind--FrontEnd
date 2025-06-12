@@ -3,7 +3,7 @@ import {FoundItem} from '../../shared/models/found-item';
 import {URLS} from '../../shared/urls';
 import {BaseService} from '../../shared/services/base.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {NavigationExtras, Router, RouterLink} from '@angular/router';
+import {NavigationExtras, Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
@@ -30,6 +30,7 @@ import {LoginService} from '../../shared/services/login.service';
     RouterLink,
     DatePipe,
     NgIf,
+    RouterLinkActive,
   ],
   providers: [DatePipe],
   templateUrl: './found-list.component.html',

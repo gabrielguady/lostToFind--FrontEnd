@@ -1,12 +1,37 @@
 
+<header class="app-header">
+  <div class="flex align-items-center gap-2 px-3 py-2">
+    <span class="text-black font-bold text-xl">Lost to Find</span>
+    <div class="logo-mask">
+      <video autoplay loop muted playsinline>
+        <source src="assets/logo-moving.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
 
-<div class="flex flex-column gap-1">
-  <h1>
-    Cadastro de Item Achado
-  </h1>
+  <!-- Botões à direita -->
+  <div class="flex gap-4 ml-auto m-3">
+    <button class=" lost-b " mat-button routerLink="/lost_item">Itens Perdidos</button>
+
+    <div routerLinkActive="selected" [routerLinkActiveOptions]="{ exact: true }">
+      <button class="found-b" mat-button routerLink="/found_item">
+        Itens Encontrados
+      </button>
+    </div>
+
+    <button class=" myitem-b " mat-button routerLink="/my_items">Meus Itens</button>
+    <button class="user" mat-icon-button routerLink="/user">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
+</header>
+
+  <div class="flex flex-column gap-1">
 
   <div class="flex justify-content-center px-4 mt-5">
     <div class="surface-card w-full md:w-11 lg:w-10 xl:w-9 p-5 shadow-3 border-round-xl">
+
+      <h1>Cadastro de Item Achado</h1>
 
   <form [formGroup]="formGroup">
     <div class="flex flex-column gap-3 mb-4">
@@ -45,7 +70,7 @@
     <button mat-flat-button class="btn-default" id="save" type="submit"
             (click)="saveOrUpdate()"
             [disabled]="!formGroup.valid">
-      Salvar Item perdido
+      Salvar Item encontrado
 
     </button>
   </form>

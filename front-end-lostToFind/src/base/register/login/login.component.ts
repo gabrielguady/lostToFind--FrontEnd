@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AutofocusDirective } from '../../../shared/directives/auto-focus-directive';
 import { NavigationExtras, Router } from '@angular/router';
 import { LoginService } from '../../../shared/services/login.service';
 import { DefaultLoginLayoutComponent } from '../default-login-layout/default-login-layout.component';
 import {InputPrimaryComponent} from '../input-primary/input-primary.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -37,14 +38,28 @@ export class LoginComponent implements OnInit {
   submit() {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
+
       this.loginService.login(username, password).subscribe({
         next: () => {
           const user = this.loginService.user;
           console.log('Usuário logado:', user || 'não definido');
+
+          // ✅ Mostrar mensagem de sucesso
+          this.snackBar.open('Login bem-sucedido!', 'Fechar', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          });
+
           this.navigate('home');
         },
         error: (err) => {
           console.error('Erro ao fazer login:', err);
+          this.snackBar.open('Erro no login. Verifique suas credenciais.', 'Fechar', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top',
+          });
         }
       });
     }
@@ -56,12 +71,3 @@ export class LoginComponent implements OnInit {
   }
 }
 
-// submit(){
-//   this.loginService.login(this.loginForm.value.username, this.loginForm.value.password).subscribe(
-//     {
-//       next: () => this.navigate('lost_item'),
-//       error: () => console.log("error"),
-//     }
-//   )
-//
-// }

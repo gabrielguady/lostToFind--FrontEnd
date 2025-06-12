@@ -1,0 +1,18 @@
+
+.logo-mask {
+  height: 37px;
+  width: 38.2px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-mask video {
+  height: 44px;
+  width: 40.8px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: -3.5px -3.5px;
+}

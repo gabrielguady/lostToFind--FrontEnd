@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {URLS} from '../../shared/urls';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {NavigationExtras, Router, RouterLink} from '@angular/router';
+import {NavigationExtras, Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton, MatButtonModule} from '@angular/material/button';
 import {LostItem} from '../../shared/models/lost-item';
 import {BaseService} from '../../shared/services/base.service';
 import {MatTooltip} from '@angular/material/tooltip';
@@ -29,7 +29,9 @@ import {LoginService} from '../../shared/services/login.service';
     MatCardModule,
     MatTooltip,
     RouterLink,
-    DatePipe
+    DatePipe,
+    MatButton,
+    RouterLinkActive
   ],
   providers: [DatePipe],
   templateUrl: './lost-list.component.html',

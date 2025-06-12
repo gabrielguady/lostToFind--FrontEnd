@@ -13,6 +13,8 @@ import {MatOption, provideNativeDateAdapter} from '@angular/material/core';
 import {MatSelect} from '@angular/material/select';
 import {NgIf} from '@angular/common';
 import {AddPhotoComponent} from '../../add-photo-found/add-photo-found.component';
+import {MatIcon} from '@angular/material/icon';
+import {RouterLink, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'app-found-item-create',
@@ -32,7 +34,10 @@ import {AddPhotoComponent} from '../../add-photo-found/add-photo-found.component
     MatOption,
     AddPhotoComponent,
     NgIf,
-    AddPhotoComponent
+    AddPhotoComponent,
+    MatIcon,
+    RouterLink,
+    RouterLinkActive
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [provideNativeDateAdapter()],

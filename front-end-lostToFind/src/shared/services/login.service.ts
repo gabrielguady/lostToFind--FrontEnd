@@ -69,6 +69,7 @@ export class LoginService {
           localStorage.setItem(ACCESS_TOKEN_KEY, access);
           localStorage.setItem(REFRESH_TOKEN_KEY, refresh);
           this.user.next(data);
+          console.log(data)
           return data;
         })
       );
@@ -106,5 +107,9 @@ export class LoginService {
       filter(user => user !== undefined),
       map(isAuthenticated => isAuthenticated ? router.createUrlTree(['/login']) : true)
     );
+  }
+
+  getUserEmail() {
+    const router = inject(Router);
   }
 }

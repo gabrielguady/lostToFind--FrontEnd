@@ -1,7 +1,37 @@
+<!-- Header -->
 <header class="app-header">
   <div class="flex align-items-center gap-2 px-3 py-2">
     <span class="text-black font-bold text-xl">Lost to Find</span>
-    <img src="logo.png" class="h-10">
+    <div class="logo-mask">
+      <video autoplay loop muted playsinline>
+        <source src="assets/logo-moving.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </div>
+
+  <!-- Botões à direita -->
+  <div class="flex gap-4 ml-auto m-3">
+    <div routerLinkActive="selected" [routerLinkActiveOptions]="{ exact: true }">
+      <button class="lost-b" mat-button routerLink="/lost_item">
+        Itens Perdidos
+      </button>
+    </div>
+
+    <div routerLinkActive="selected" [routerLinkActiveOptions]="{ exact: true }">
+      <button class="found-b" mat-button routerLink="/found_item">
+        Itens Encontrados
+      </button>
+    </div>
+
+    <div routerLinkActive="selected" [routerLinkActiveOptions]="{ exact: true }">
+      <button class="myitem-b" mat-button routerLink="/my_items">
+        Meus Itens
+      </button>
+    </div>
+
+    <button class="user" mat-icon-button routerLink="/user">
+      <mat-icon>account_circle</mat-icon>
+    </button>
   </div>
 </header>
 
@@ -33,33 +63,43 @@
     </button>
   </div>
 
-  <div class="row flex-justify-content-center">
-    <div class="flex-justify-content-center col-12 col-sm-6 col-md-4 col-lg-3">
-      @for (items of dataSource; track items.title) {
+  <div class="flex flex-wrap justify-content-center gap-4">
+    @for (items of dataSource; track items.title) {
+      <div class="w-full">
         <mat-card class="cardWithShadow items">
-          <a routerLink="/found_item">
-            <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="imgSrc" class="justify-content-center w-60" mat-card-image />
+          <!-- Imagem à esquerda -->
+          <a routerLink="/photo">
+            <img
+              src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+              alt="imgSrc"
+              class="w-10rem border-round shadow-2"
+            />
           </a>
-          <mat-card-content class="flex-justify-content-center p-b-24 p-t-12 position-relative">
+
+          <!-- Conteúdo à direita -->
+          <mat-card-content class="cardContent">
             <mat-card-title class="mat-headline-2 f-s-16 m-b-4">
               {{ items.title }}
             </mat-card-title>
-            <div class="d-flex flex-justify-content-center">
-              <div class="d-flex align-items-center">
-                <h3 class="mat-body-2 f-w-600">{{ items.city }}</h3>
-                <h5 class="mat-body-2 f-w-600"> {{ items.date_lost | date:'shortDate' }}</h5>
-                <span class="f-s-14 m-l-4">{{ items.last_seen_details }}</span>
-              </div>
-              <div class="flex-justify-content-center flex-grow-1 gap-4">
-              </div>
+
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <h3 class="mat-body-2 f-w-600 m-0">{{ items.city }}</h3>
+              <h5 class="mat-body-2 f-w-600 m-0">{{ items.date_lost | date:'shortDate' }}</h5>
             </div>
-            <button mat-raised-button class="w-100" matTooltip="meu item" (click)="goToPage('photo')">
+
+            <p class="f-s-14 m-0">{{ items.last_seen_details }}</p>
+
+            <button
+              mat-raised-button
+              class="mt-3"
+              matTooltip="meu item"
+              (click)="goToPage('photo')">
               Item lost
             </button>
           </mat-card-content>
         </mat-card>
-      }
-    </div>
+      </div>
+    }
   </div>
 
   @if (dataSource.length === 0) {

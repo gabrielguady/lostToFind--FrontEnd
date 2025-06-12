@@ -2,96 +2,170 @@
 <!-- Header -->
 <header class="app-header">
   <div class="flex align-items-center gap-2 px-3 py-2">
-    <span class="text-black font-bold text-xl">Lost to Find</span>
-    <img src="app/home/logo.png" class="h-4" />
+    <span class="text-white font-bold text-xl">Lost to Find</span>
+    <div class="logo-mask">
+      <video autoplay loop muted playsinline>
+        <source src="assets/logo-moving.mp4" type="video/mp4" />
+      </video>
+    </div>
   </div>
 
-  <!-- Botões à direita -->
-  <div class="flex gap-4 ml-auto">
-    <button class=" lost-b " mat-stroked-button routerLink="/lost_item">Itens Perdidos</button>
-    <button class=" found-b " mat-stroked-button  routerLink="/found_item">Itens Encontrados</button>
-    <button class=" myitem-b " mat-stroked-button routerLink="/my_items">Meus Itens</button>
+
+
+<!-- Botões à direita -->
+  <div class="flex gap-4 ml-auto m-3">
+    <button class=" lost-b " mat-button routerLink="/lost_item">Itens Perdidos</button>
+    <button class=" found-b " mat-button  routerLink="/found_item">Itens Encontrados</button>
+    <button class=" myitem-b " mat-button routerLink="/my_items">Meus Itens</button>
+
+    <div routerLinkActive="selected" [routerLinkActiveOptions]="{ exact: true }">
+      <button class="user" mat-icon-button routerLink="/user">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
+
   </div>
 </header>
 
-<!--&lt;!&ndash; Card moderno para Itens Recentes &ndash;&gt;-->
-<!--<div class="p-6 bg-blue-50 min-h-screen">-->
-<!--  <h2 class="text-3xl font-bold mb-6 text-blue-900 text-center">Itens Recentes</h2>-->
 
-
-<!-- Seção: Sobre o Lost to Find -->
-<div class="my-10 px-4">
-  <h2 class="text-3xl font-bold text-center text-blue-900 mb-4">Sobre o Lost to Find</h2>
+<!-- Seção sobre  -->
+<div class="border-4 my-10 px-4">
+  <h2 class="sobre  text-3xl font-bold text-center text-blue-900 mb-4">Sobre o Lost to Find</h2>
   <p class="text-center text-blue-700 mb-8">
     Nosso compromisso é ajudar pessoas a recuperarem seus pertences perdidos.
   </p>
 
   <div class="flex flex-column md:flex-row gap-6">
+
     <!-- Como Funciona -->
-    <div class="flex-1 p-5 border-1 border-blue-200 shadow-sm rounded-xl bg-white">
-      <h3 class="text-2xl font-semibold text-blue-800 mb-4">Como Funciona</h3>
+    <p-card class="flex-1 shadow-3 border-round-xl">
+      <ng-template pTemplate="content">
+        <div class="p-4">
+          <h3 class="text-2xl font-semibold text-blue-800 mb-4">Como Funciona</h3>
 
-      <div class="flex gap-3 align-items-start mb-4">
-        <i class="pi pi-search text-2xl text-blue-600"></i>
-        <div>
-          <strong>1. Relate o item</strong>
-          <p>Preencha o formulário com detalhes sobre o item perdido ou encontrado.</p>
+          <div class="flex gap-3 align-items-start mb-4">
+            <i class="pi pi-search text-2xl text-blue-600"></i>
+            <div>
+              <strong>1. Relate o item</strong>
+              <p>Preencha o formulário com detalhes sobre o item perdido ou encontrado.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-3 align-items-start mb-4">
+            <i class="pi pi-bell text-2xl text-blue-600"></i>
+            <div>
+              <strong>2. Publicação</strong>
+              <p>Seu relato será publicado em nosso sistema para que outras pessoas possam ver.</p>
+            </div>
+          </div>
+
+          <div class="flex gap-3 align-items-start">
+            <i class="pi pi-comments text-2xl text-blue-600"></i>
+            <div>
+              <strong>3. Conexão</strong>
+              <p>Se houver correspondência, conectamos as partes interessadas para a devolução.</p>
+            </div>
+          </div>
         </div>
-      </div>
+      </ng-template>
+    </p-card>
 
-      <div class="flex gap-3 align-items-start mb-4">
-        <i class="pi pi-bell text-2xl text-blue-600"></i>
-        <div>
-          <strong>2. Publicação</strong>
-          <p>Seu relato será publicado em nosso sistema para que outras pessoas possam ver.</p>
+    <!-- dicas -->
+    <p-card class="flex-1 shadow-3 border-round-xl">
+      <ng-template pTemplate="content">
+        <div class="p-4">
+          <h3 class="text-2xl font-semibold text-blue-800 mb-4">Dicas Importantes</h3>
+
+          <ul class="list-none p-0 m-0">
+            <li class="flex align-items-start mb-3">
+              <i class="pi pi-check-circle text-green-600 text-lg mr-2 mt-1"></i>
+              <span>Forneça o máximo de detalhes possível sobre o item</span>
+            </li>
+            <li class="flex align-items-start mb-3">
+              <i class="pi pi-check-circle text-green-600 text-lg mr-2 mt-1"></i>
+              <span>Inclua fotos quando disponível</span>
+            </li>
+            <li class="flex align-items-start mb-3">
+              <i class="pi pi-check-circle text-green-600 text-lg mr-2 mt-1"></i>
+              <span>Seja específico sobre local e data</span>
+            </li>
+            <li class="flex align-items-start mb-3">
+              <i class="pi pi-check-circle text-green-600 text-lg mr-2 mt-1"></i>
+              <span>Para documentos, relate apenas características gerais (não inclua números completos)</span>
+            </li>
+            <li class="flex align-items-start">
+              <i class="pi pi-check-circle text-green-600 text-lg mr-2 mt-1"></i>
+              <span>Mantenha contato conosco para atualizações</span>
+            </li>
+          </ul>
         </div>
-      </div>
+      </ng-template>
+    </p-card>
 
-      <div class="flex gap-3 align-items-start">
-        <i class="pi pi-comments text-2xl text-blue-600"></i>
-        <div>
-          <strong>3. Conexão</strong>
-          <p>Se houver correspondência, conectamos as partes interessadas para a devolução.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Dicas Importantes -->
-    <div class="flex-1 p-5 border-1 border-blue-200 shadow-sm rounded-xl bg-white">
-      <h3 class="text-2xl font-semibold text-blue-800 mb-4">Dicas Importantes</h3>
-
-      <ul class="list-none p-0 m-0">
-        <li class="flex align-items-start mb-3">
-          <i class="pi pi-check-circle text-green-600 text-lg mr-2 mt-1"></i>
-          <span>Forneça o máximo de detalhes possível sobre o item</span>
-        </li>
-        <li class="flex align-items-start mb-3">
-          <i class="pi pi-check-circle text-green-600 text-lg mr-2 mt-1"></i>
-          <span>Inclua fotos quando disponível</span>
-        </li>
-        <li class="flex align-items-start mb-3">
-          <i class="pi pi-check-circle text-green-600 text-lg mr-2 mt-1"></i>
-          <span>Seja específico sobre local e data</span>
-        </li>
-        <li class="flex align-items-start mb-3">
-          <i class="pi pi-check-circle text-green-600 text-lg mr-2 mt-1"></i>
-          <span>Para documentos, relate apenas características gerais (não inclua números completos)</span>
-        </li>
-        <li class="flex align-items-start">
-          <i class="pi pi-check-circle text-green-600 text-lg mr-2 mt-1"></i>
-          <span>Mantenha contato conosco para atualizações</span>
-        </li>
-      </ul>
-    </div>
   </div>
 </div>
 
+<!--<div class="footer-container">-->
+<!--  <div class="newsletter-section">-->
+<!--    <div class="p-text-center">-->
+<!--      <h2>Receba Novidades</h2>-->
+<!--      <p>Cadastre-se para receber atualizações sobre itens perdidos e dicas para proteger seus pertences.</p>-->
+<!--      <div class="newsletter-container">-->
+<!--        <mat-card class="newsletter-compact-card">-->
+<!--          <mat-card-content class="newsletter-card-content">-->
+<!--            <mat-form-field appearance="outline" class="full-width-input">-->
+<!--              <mat-label>Seu melhor e-mail</mat-label>-->
+<!--              <input matInput type="email" [(ngModel)]="emailNewsletter" placeholder="ex: seu@email.com">-->
+<!--            </mat-form-field>-->
 
+<!--            <button mat-raised-button class="cad-button" (click)="subscribeToNewsletter()">-->
+<!--              Cadastrar-->
+<!--            </button>-->
+<!--          </mat-card-content>-->
+<!--        </mat-card>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 
+  <div class="footer-main p-grid p-justify-between p-px-4 p-py-6">
+    <div class="p-col-12 p-md-3">
+      <h3>Lost to Find</h3>
+      <p>Conectando pessoas e pertences desde 2024. Nosso objetivo é ajudar a comunidade a recuperar itens perdidos.</p>
+    </div>
 
+    <div class="p-col-12 p-md-2">
+      <h3>Links Úteis</h3>
+      <ul class="p-p-0 p-m-0 p-list-unstyled">
+        <li *ngFor="let link of usefulLinks">
+          <a [routerLink]="link.route" class="footer-link">{{ link.label }}</a>
+        </li>
+      </ul>
+    </div>
 
+    <div class="p-col-12 p-md-3">
+      <h3>Contato</h3>
+      <ul class="p-p-0 p-m-0 p-list-unstyled">
+        <li *ngFor="let item of contactInfo">
+          <ng-container *ngIf="item.type === 'email' || item.type === 'phone'; else staticContact">
+            <a href="javascript:void(0)" (click)="handleContactClick(item)" class="footer-link-contact">
+              <i [class]="item.icon" class="p-mr-2"></i> {{ item.text }}
+            </a>
+          </ng-container>
+          <ng-template #staticContact>
+            <span class="footer-contact-text">
+              <i [class]="item.icon" class="p-mr-2"></i> {{ item.text }}
+            </span>
+          </ng-template>
+        </li>
+      </ul>
+    </div>
 
+    <div class="p-col-12 p-md-2">
+    </div>
+  </div>
 
-
-
+  <div class="footer-copyright p-text-center p-py-3">
+    <p class="p-col-12 p-md-3 m-3">&copy; 2025 Achados e Perdidos. Todos os direitos reservados.</p>
+  </div>
+<!--</div>-->
 

@@ -1,16 +1,23 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink, RouterLinkActive} from '@angular/router';
 import {BaseService} from '../../shared/services/base.service';
 import {FoundItem} from '../../shared/models/found-item';
 import {HttpParams} from '@angular/common/http';
 import {NgIf} from '@angular/common';
+import {MatButton, MatIconButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-item-section',
   standalone: true,
   imports: [
-    NgIf
+    NgIf,
+    MatButton,
+    MatIcon,
+    MatIconButton,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './item-section.component.html',
   styleUrl: './item-section.component.css'

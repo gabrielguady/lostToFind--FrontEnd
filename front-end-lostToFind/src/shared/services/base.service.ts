@@ -58,9 +58,12 @@ export class BaseService<T> {
   }
 
   private getAccessToken(): string {
-    const token = this.loginService?.getAccessToken() || localStorage.getItem('access');
+    const token = this.loginService?.getAccessToken() ||
+      localStorage.getItem('APP_ACCESS_TOKEN');
+      sessionStorage.getItem('APP_ACCESS_TOKEN');
     return token || '';
   }
+
 
   public get headers(): HttpHeaders {
     const accessToken = this.getAccessToken();
@@ -113,7 +116,7 @@ export class BaseService<T> {
   public save(entity: T): Observable<T> {
     this.clearParameter();
     const url = this.fullUrl;
-    return this.http.post<T>(url, entity, { headers: this.headers });
+    return this.http.post<T>(url, entity, this.getOptions());
   }
 
   public update(id: number | string, entity: any): Observable<T> {

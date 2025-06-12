@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {LostItem} from '../../shared/models/lost-item';
-import {NavigationExtras, Router, RouterLink} from '@angular/router';
+import {NavigationExtras, Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {BaseService} from '../../shared/services/base.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {LoginService} from '../../shared/services/login.service';
 import {DatePipe} from '@angular/common';
 import {URLS} from '../../shared/urls';
 import {FoundItem} from '../../shared/models/found-item';
-import {MatButton, MatFabButton} from '@angular/material/button';
+import {MatButton, MatFabButton, MatIconButton} from '@angular/material/button';
 import {MatCard, MatCardContent, MatCardImage, MatCardTitle} from '@angular/material/card';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatIcon} from '@angular/material/icon';
@@ -22,7 +22,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatButton,
     MatCard,
     MatCardContent,
-    MatCardImage,
     MatCardTitle,
     MatFabButton,
     MatFormField,
@@ -32,7 +31,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatTooltip,
     ReactiveFormsModule,
     RouterLink,
-    FormsModule
+    FormsModule,
+    MatIconButton,
+    DatePipe,
+    RouterLinkActive
   ],
   providers: [DatePipe],
   templateUrl: './myitems.component.html',
