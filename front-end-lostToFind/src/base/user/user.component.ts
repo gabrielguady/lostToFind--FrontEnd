@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import {RouterLink, RouterLinkActive} from '@angular/router';
-import { InputText } from 'primeng/inputtext';
-import { ButtonDirective } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { MatCard } from '@angular/material/card';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
-import jwtDecode from 'jwt-decode';
 import {LoginService} from '../../shared/services/login.service';
+import {BaseService} from '../../shared/services/base.service';
 
 @Component({
   selector: 'app-user',
@@ -45,7 +43,6 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     const token = localStorage.getItem('APP_ACCESS_TOKEN');
-    console.log('Token JWT:', token);
     const username = this.loginService.getUsername();
     if (username) {
       this.name = username; // aqui o nome é preenchido dinamicamente

@@ -4,6 +4,7 @@ import {NavigationExtras, Router} from '@angular/router';
 import {LoginService} from '../../../shared/services/login.service';
 import {InputPrimaryComponent} from '../input-primary/input-primary.component';
 import {DefaultLoginLayoutComponent} from '../default-login-layout/default-login-layout.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signup',
@@ -25,7 +26,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private signupService: LoginService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -45,17 +47,40 @@ export class SignupComponent implements OnInit {
     const { username, password, confirmPassword } = this.signupForm.value;
 
     if (password !== confirmPassword) {
-      console.warn('As senhas não coincidem.');
+      console.log('As senhas não coincidem.');
+
+      this.snackBar.open('As senhas não coincidem', 'Fechar', {
+        duration: 4000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      });
+
       return;
+
     }
 
     this.signupService.signup(username, password).subscribe({
       next: () => {
         console.log('Usuário cadastrado com sucesso!');
+
+        this.snackBar.open('Usuário cadastrado com sucesso!', 'Fechar', {
+          duration: 4000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+
         this.navigate('login');
+
       },
+
       error: (err) => {
         console.error('Erro ao cadastrar usuário:', err);
+
+        this.snackBar.open('Erro no cadastro. Verifique suas credenciais.', 'Fechar', {
+          duration: 4000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
       }
     });
   }

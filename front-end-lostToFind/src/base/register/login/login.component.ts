@@ -46,19 +46,18 @@ export class LoginComponent implements OnInit {
 
           // ✅ Mostrar mensagem de sucesso
           this.snackBar.open('Login bem-sucedido!', 'Fechar', {
-            duration: 3000,
+            duration: 4000,
             horizontalPosition: 'center',
-            verticalPosition: 'top',
+            verticalPosition: 'bottom',
           });
-
           this.navigate('home');
         },
         error: (err) => {
           console.error('Erro ao fazer login:', err);
           this.snackBar.open('Erro no login. Verifique suas credenciais.', 'Fechar', {
-            duration: 3000,
+            duration: 4000,
             horizontalPosition: 'center',
-            verticalPosition: 'top',
+            verticalPosition: 'bottom',
           });
         }
       });
