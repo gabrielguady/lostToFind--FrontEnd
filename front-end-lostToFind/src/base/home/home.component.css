@@ -11,10 +11,6 @@
   display: flex;
   align-items: center;
 }
-.logo {
-  height: 24px;
-  width: auto;
-}
 
 .lost-b {
   color: #ffffff !important;

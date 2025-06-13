@@ -9,17 +9,19 @@ import {MyitemsComponent} from '../base/myitems/myitems.component';
 import {AddPhotoComponent} from '../base/add-photo-lost/add-photo.component';
 import {HomeComponent} from '../base/home/home.component'
 import {UserComponent} from '../base/user/user.component';
+import {ItemSectionComponent} from '../base/item-section/item-section.component';
 
 export const routes: Routes = [
 
   {path: 'home', component: HomeComponent},
-  {path:'lost_item', component: LostItemListComponent},
-  {path:'found_item', component: FoundItemListComponent},
+  {path: 'lost_item', component: LostItemListComponent},
+  {path: 'found_item', component: FoundItemListComponent},
   {path: 'lost_item/:action', component: LostItemCreateComponent},
   {path: 'found_item/:action', component: FoundItemCreateComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'my_items', component: MyitemsComponent},
   {path: 'photo', component: AddPhotoComponent},
-  {path: 'user', component: UserComponent}
+  {path: 'user', component: UserComponent},
+  {path: 'item-section', component: ItemSectionComponent},
 ];
