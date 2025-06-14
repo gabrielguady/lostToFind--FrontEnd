@@ -39,7 +39,7 @@ import {RouterLink} from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [provideNativeDateAdapter()],
   templateUrl: './lost-item-create.component.html',
-  styleUrl: './lost-item-create.component.css'
+  styleUrl: './lost-item-create.component.scss'
 })
 export class LostItemCreateComponent extends BaseComponent<LostItem> implements OnInit {
   public formGroup: FormGroup;

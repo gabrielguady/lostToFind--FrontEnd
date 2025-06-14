@@ -42,7 +42,7 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [provideNativeDateAdapter()],
   templateUrl: './found-item-create.component.html',
-  styleUrl: './found-item-create.component.css'
+  styleUrl: './found-item-create.component.scss'
 })
 export class FoundItemCreateComponent extends BaseComponent<FoundItem> implements OnInit {
 

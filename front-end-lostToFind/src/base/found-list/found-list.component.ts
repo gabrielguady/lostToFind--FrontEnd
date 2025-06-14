@@ -27,16 +27,15 @@ import {LoginService} from '../../shared/services/login.service';
     MatInputModule,
     FormsModule,
     MatTooltip,
-    RouterLink,
     DatePipe,
-    NgIf,
-    RouterLinkActive,
+    NgIf
   ],
   providers: [DatePipe],
   templateUrl: './found-list.component.html',
-  styleUrl: './found-list.component.css'
+  styleUrl: './found-list.component.scss'
 })
 export class FoundItemListComponent implements OnInit {
+  public searchTitle: string = '';
   public dataSource: FoundItem[] = [];
   public searchName: string = '';
   public searchCity: string='';

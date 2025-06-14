@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {URLS} from '../../shared/urls';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {NavigationExtras, Router, RouterLink, RouterLinkActive} from '@angular/router';
+import {NavigationExtras, Router} from '@angular/router';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
@@ -11,8 +11,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatButton, MatButtonModule} from '@angular/material/button';
 import {LostItem} from '../../shared/models/lost-item';
 import {BaseService} from '../../shared/services/base.service';
-import {MatTooltip} from '@angular/material/tooltip';
-import {DatePipe} from '@angular/common';
+import {DatePipe, DecimalPipe} from '@angular/common';
 import {LoginService} from '../../shared/services/login.service';
 
 
@@ -27,20 +26,17 @@ import {LoginService} from '../../shared/services/login.service';
     FormsModule,
     MatInputModule,
     MatCardModule,
-    MatTooltip,
-    RouterLink,
     DatePipe,
     MatButton,
-    RouterLinkActive
+    DecimalPipe
   ],
   providers: [DatePipe],
   templateUrl: './lost-list.component.html',
-  styleUrl: './lost-list.component.css'
+  styleUrl: './lost-list.component.scss'
 })
 export class LostItemListComponent implements OnInit {
   public dataSource: LostItem[] = [];
   public searchTitle: string = '';
-  public searchLastSeen: string =  '';
   public searchCity: string = '';
 
   private router: Router = new Router();
@@ -65,7 +61,6 @@ export class LostItemListComponent implements OnInit {
   public search(resetIndex: boolean = false): void {
     this.service.clearParameter();
     this.service.addParameter('title', this.searchTitle);
-    this.service.addParameter('last_seen_details', this.searchLastSeen);
     this.service.addParameter('city', this.searchCity);
     this.service.getAll().subscribe({
       next: (data: LostItem[]) => {

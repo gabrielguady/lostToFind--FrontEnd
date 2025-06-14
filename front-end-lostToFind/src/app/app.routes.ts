@@ -12,7 +12,7 @@ import {UserComponent} from '../base/user/user.component';
 import {ItemSectionComponent} from '../base/item-section/item-section.component';
 
 export const routes: Routes = [
-
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'lost_item', component: LostItemListComponent},
   {path: 'found_item', component: FoundItemListComponent},

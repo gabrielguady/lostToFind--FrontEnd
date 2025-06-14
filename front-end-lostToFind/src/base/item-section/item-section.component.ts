@@ -20,7 +20,7 @@ import {MatIcon} from '@angular/material/icon';
     RouterLinkActive
   ],
   templateUrl: './item-section.component.html',
-  styleUrl: './item-section.component.css'
+  styleUrl: './item-section.component.scss'
 })
 export class ItemSectionComponent implements OnInit {
   itemId: number | null = null;

@@ -38,7 +38,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   ],
   providers: [DatePipe],
   templateUrl: './myitems.component.html',
-  styleUrl: './myitems.component.css'
+  styleUrl: './myitems.component.scss'
 })
 export class MyitemsComponent implements OnInit {
   public dataSource: FoundItem[] = [];

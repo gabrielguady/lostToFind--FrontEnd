@@ -1,32 +1,3 @@
-
-<!-- Header -->
-<header class="app-header">
-  <div class="flex align-items-center gap-2 px-3 py-2">
-    <span class="text-white font-bold text-xl">Lost to Find</span>
-    <div class="logo-mask">
-      <video autoplay loop muted playsinline>
-        <source src="assets/logo-moving.mp4" type="video/mp4" />
-      </video>
-    </div>
-  </div>
-
-
-<!-- Botões à direita -->
-  <div class="flex gap-4 ml-auto m-3">
-    <button class=" lost-b " mat-button routerLink="/lost_item">Itens Perdidos</button>
-    <button class=" found-b " mat-button  routerLink="/found_item">Itens Encontrados</button>
-    <button class=" myitem-b " mat-button routerLink="/my_items">Meus Itens</button>
-
-    <div routerLinkActive="selected" [routerLinkActiveOptions]="{ exact: true }">
-      <button class="user" mat-icon-button routerLink="/user">
-        <mat-icon>account_circle</mat-icon>
-      </button>
-    </div>
-
-  </div>
-</header>
-
-
 <!-- Seção sobre  -->
 <div class="border-4 my-10 px-4">
   <h2 class="sobre  text-3xl font-bold text-center text-blue-900 mb-4">Sobre o Lost to Find</h2>
@@ -126,45 +97,45 @@
 <!--    </div>-->
 <!--  </div>-->
 
-  <div class="footer-main p-grid p-justify-between p-px-4 p-py-6">
-    <div class="p-col-12 p-md-3">
-      <h3>Lost to Find</h3>
-      <p>Conectando pessoas e pertences desde 2024. Nosso objetivo é ajudar a comunidade a recuperar itens perdidos.</p>
-    </div>
+<div class="footer-main p-grid p-justify-between p-px-4 p-py-6">
+  <div class="p-col-12 p-md-3">
+    <h3>Lost to Find</h3>
+    <p>Conectando pessoas e pertences desde 2024. Nosso objetivo é ajudar a comunidade a recuperar itens perdidos.</p>
+  </div>
 
-    <div class="p-col-12 p-md-2">
-      <h3>Links Úteis</h3>
-      <ul class="p-p-0 p-m-0 p-list-unstyled">
-        <li *ngFor="let link of usefulLinks">
-          <a [routerLink]="link.route" class="footer-link">{{ link.label }}</a>
-        </li>
-      </ul>
-    </div>
+  <div class="p-col-12 p-md-2">
+    <h3>Links Úteis</h3>
+    <ul class="p-p-0 p-m-0 p-list-unstyled">
+      <li *ngFor="let link of usefulLinks">
+        <a [routerLink]="link.route" class="footer-link">{{ link.label }}</a>
+      </li>
+    </ul>
+  </div>
 
-    <div class="p-col-12 p-md-3">
-      <h3>Contato</h3>
-      <ul class="p-p-0 p-m-0 p-list-unstyled">
-        <li *ngFor="let item of contactInfo">
-          <ng-container *ngIf="item.type === 'email' || item.type === 'phone'; else staticContact">
-            <a href="javascript:void(0)" (click)="handleContactClick(item)" class="footer-link-contact">
-              <i [class]="item.icon" class="p-mr-2"></i> {{ item.text }}
-            </a>
-          </ng-container>
-          <ng-template #staticContact>
+  <div class="p-col-12 p-md-3">
+    <h3>Contato</h3>
+    <ul class="p-p-0 p-m-0 p-list-unstyled">
+      <li *ngFor="let item of contactInfo">
+        <ng-container *ngIf="item.type === 'email' || item.type === 'phone'; else staticContact">
+          <a href="javascript:void(0)" (click)="handleContactClick(item)" class="footer-link-contact">
+            <i [class]="item.icon" class="p-mr-2"></i> {{ item.text }}
+          </a>
+        </ng-container>
+        <ng-template #staticContact>
             <span class="footer-contact-text">
               <i [class]="item.icon" class="p-mr-2"></i> {{ item.text }}
             </span>
-          </ng-template>
-        </li>
-      </ul>
-    </div>
-
-    <div class="p-col-12 p-md-2">
-    </div>
+        </ng-template>
+      </li>
+    </ul>
   </div>
 
-  <div class="footer-copyright p-text-center p-py-3">
-    <p class="p-col-12 p-md-3 m-3">&copy; 2025 Achados e Perdidos. Todos os direitos reservados.</p>
+  <div class="p-col-12 p-md-2">
   </div>
+</div>
+
+<div class="footer-copyright p-text-center p-py-3">
+  <p class="p-col-12 p-md-3 m-3">&copy; 2025 Achados e Perdidos. Todos os direitos reservados.</p>
+</div>
 <!--</div>-->
 

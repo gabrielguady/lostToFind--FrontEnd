@@ -29,7 +29,7 @@ import {MatIcon} from '@angular/material/icon';
     RouterLinkActive
   ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   searchTerm = ''

@@ -27,7 +27,7 @@ import {BaseService} from '../../shared/services/base.service';
     RouterLinkActive
   ],
   templateUrl: './user.component.html',
-  styleUrl: './user.component.css'
+  styleUrl: './user.component.scss'
 })
 export class UserComponent implements OnInit {
   name: string = '';

@@ -1,0 +1,38 @@
+table {
+  width: 100%;
+  .mat-mdc-header-cell {
+    font-weight: bold;
+    background: black;
+    color: white;
+  }
+}
+
+.mat-mdc-form-field {
+  width: 30%;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+
+}
+.mat-raised-button {
+  background-color: #C0FFCF;
+  color: #000;
+}
+
+.cardWithShadow {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+img {
+  max-width: 10rem;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}

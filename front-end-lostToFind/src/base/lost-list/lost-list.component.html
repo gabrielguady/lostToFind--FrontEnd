@@ -1,104 +1,104 @@
-<!-- Header -->
-<header class="app-header">
-  <div class="flex align-items-center gap-2 px-3 py-2">
-    <span class="text-black font-bold text-xl">Lost to Find</span>
-    <div class="logo-mask">
-      <video autoplay loop muted playsinline>
-        <source src="assets/logo-moving.mp4" type="video/mp4" />
-      </video>
-    </div>
-  </div>
+<div class="flex flex-column justify-content-center align-content-center px-4 m-5">
+  <mat-card class="mx-4 mb-4">
+    <mat-card-header>
+      <div class="flex flex-row justify-content-between align-items-between w-full">
+        <h2>Econtre itens perdidos</h2>
+        <button mat-raised-button (click)="goToPage('lost_item/create')" class="btn-default">
+          Cadastre um item perdido
+        </button>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="flex flex-row justify-content-between align-content-between gap-3 w-full">
+          <mat-form-field class="w-6"> <!-- Formulario -->
+            <mat-label>Pesquisar titulo</mat-label>
+            <input matInput [(ngModel)]="searchTitle">
+          </mat-form-field>
+          <mat-form-field class="w-6"> <!-- Formulario -->
+            <mat-label>Pesquisar cidade</mat-label>
+            <input matInput [(ngModel)]="searchCity">
+          </mat-form-field>
 
-  <!-- Botões à direita -->
-  <div class="flex gap-4 ml-auto m-3">
-    <div routerLinkActive="selected" [routerLinkActiveOptions]="{ exact: true }">
-      <button class="lost-b" mat-button routerLink="/lost_item">
-        Itens Perdidos
-      </button>
-    </div>
-
-    <div routerLinkActive="selected" [routerLinkActiveOptions]="{ exact: true }">
-      <button class="found-b" mat-button routerLink="/found_item">
-        Itens Encontrados
-      </button>
-    </div>
-
-    <div routerLinkActive="selected" [routerLinkActiveOptions]="{ exact: true }">
-      <button class="myitem-b" mat-button routerLink="/my_items">
-        Meus Itens
-      </button>
-    </div>
-
-    <button class="user" mat-icon-button routerLink="/user">
-      <mat-icon>account_circle</mat-icon>
-    </button>
-  </div>
-</header>
-
-  <div class="flex justify-content-center px-4 mt-5">
-    <div class="surface-card w-full md:w-11 lg:w-10 xl:w-9 p-5 shadow-3 border-round-xl">
-
-<h1>Recente itens perdidos</h1>
-<div class="flex flex-column gap-1">
-  <div class="flex gap-3">
-    <mat-form-field> <!-- Formulario -->
-      <mat-label>Pesquisar titulo</mat-label>
-      <input matInput [(ngModel)]="searchTitle">
-    </mat-form-field>
-    <mat-form-field> <!-- Formulario -->
-      <mat-label>Pesquisar detalhes</mat-label>
-      <input matInput [(ngModel)]="searchLastSeen">
-    </mat-form-field>
-    <mat-form-field> <!-- Formulario -->
-      <mat-label>Pesquisar cidade</mat-label>
-      <input matInput [(ngModel)]="searchCity">
-    </mat-form-field>
-
-    <button mat-fab (click)="search()" class="btn-default">
-      <mat-icon>search</mat-icon>
-    </button>
-
-    <button mat-fab (click)="goToPage('lost_item/create')" class="btn-default">
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
+          <button mat-fab (click)="search()" class="btn-default">
+            <mat-icon>search</mat-icon>
+          </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
   <div class="flex flex-wrap justify-content-center gap-4">
-    @for (items of dataSource; track items.title) {
-      <div class="w-full">
-        <mat-card class="cardWithShadow items">
-          <!-- Imagem à esquerda -->
-          <a routerLink="/photo">
-            <img
-              src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-              alt="imgSrc"
-              class="w-10rem border-round shadow-2"
-            />
-          </a>
-
-          <!-- Conteúdo à direita -->
-          <mat-card-content class="cardContent">
-            <mat-card-title class="mat-headline-2 f-s-16 m-b-4">
-              {{ items.title }}
-            </mat-card-title>
-
-            <div class="d-flex align-items-center gap-2 mb-2">
-              <h3 class="mat-body-2 f-w-600 m-0">{{ items.city }}</h3>
-              <h5 class="mat-body-2 f-w-600 m-0">{{ items.date_lost | date:'shortDate' }}</h5>
+    @for (item of dataSource; track item.title) {
+      <!-- items.component.html -->
+      <div class="p-grid">
+        <div class="p-col-12 p-md-6 p-lg-4">
+          <mat-card class="item-card cursor-pointer" (click)="goToPage('photo')">
+            <div class="image-container">
+              <img mat-card-image
+                   [src]="'https://material.angular.io/assets/img/examples/shiba2.jpg'"
+                   [alt]="'imgSrc'"
+              />
+              <span class="price-badge">R$ {{ item.reward | number:'1.2-2' }}</span>
             </div>
+            <mat-card-content>
+              <h3 class="item-title">{{ item.title }}</h3>
+              <div class="metadata p-d-flex p-flex-column p-ai-start p-mt-2">
+                <div class="p-d-flex p-ai-center meta-row">
+                  <mat-icon>location_on</mat-icon>
+                  <span>{{ item.city }}</span>
+                </div>
 
-            <p class="f-s-14 m-0">{{ items.last_seen_details }}</p>
+                <div class="p-d-flex p-ai-center meta-row">
+                  <mat-icon>event</mat-icon>
+                  <span>{{ item.date_lost | date:'dd/MM/yyyy' }}</span>
+                </div>
+                <p class="description p-mt-2">{{ item.last_seen_details }}</p>
+              </div>
+            </mat-card-content>
 
-            <button
-              mat-raised-button
-              class="mt-3"
-              matTooltip="meu item"
-              (click)="goToPage('photo')">
-              Item lost
-            </button>
-          </mat-card-content>
-        </mat-card>
+            <mat-card-actions>
+              <button mat-raised-button color="primary" (click)="goToPage('photo')" class="w-full">
+                Ver detalhes
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
       </div>
+
+
+      <!--          <div class="w-full">-->
+        <!--            <mat-card class="cardWithShadow items">-->
+        <!--              &lt;!&ndash; Imagem à esquerda &ndash;&gt;-->
+        <!--              <a routerLink="/photo">-->
+        <!--                <img-->
+        <!--                  src="https://material.angular.io/assets/img/examples/shiba2.jpg"-->
+        <!--                  alt="imgSrc"-->
+        <!--                  class="w-10rem border-round shadow-2"-->
+        <!--                />-->
+        <!--              </a>-->
+
+        <!--              &lt;!&ndash; Conteúdo à direita &ndash;&gt;-->
+        <!--              <mat-card-content class="cardContent">-->
+        <!--                <mat-card-title class="mat-headline-2 f-s-16 m-b-4">-->
+        <!--                  {{ items.title }}-->
+        <!--                </mat-card-title>-->
+
+        <!--                <div class="d-flex align-items-center gap-2 mb-2">-->
+        <!--                  <h3 class="mat-body-2 f-w-600 m-0">{{ items.city }}</h3>-->
+        <!--                  <h5 class="mat-body-2 f-w-600 m-0">{{ items.date_lost | date:'shortDate' }}</h5>-->
+        <!--                </div>-->
+
+        <!--                <p class="f-s-14 m-0">{{ items.last_seen_details }}</p>-->
+
+        <!--                <button-->
+        <!--                  mat-raised-button-->
+        <!--                  class="mt-3"-->
+        <!--                  matTooltip="meu item"-->
+        <!--                  (click)="goToPage('photo')">-->
+        <!--                  Item lost-->
+        <!--                </button>-->
+        <!--              </mat-card-content>-->
+        <!--            </mat-card>-->
+        <!--          </div>-->
     }
   </div>
 
@@ -107,6 +107,4 @@
       <h2>Nenhum Item encontrado</h2>
     </div>
   }
-</div>
-  </div>
 </div>

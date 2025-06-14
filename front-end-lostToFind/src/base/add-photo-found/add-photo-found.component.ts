@@ -24,7 +24,7 @@ import {HttpClient} from '@angular/common/http';
     MatRadioButton,
   ],
   templateUrl: './add-photo-found.component.html',
-  styleUrl: './add-photo-found.component.css'
+  styleUrl: './add-photo-found.component.scss'
 })
 export class AddPhotoComponent {
   @Input() id_item_found: number;
