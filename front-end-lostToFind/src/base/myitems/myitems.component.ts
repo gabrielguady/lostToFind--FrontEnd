@@ -4,11 +4,18 @@ import {NavigationExtras, Router, RouterLink, RouterLinkActive} from '@angular/r
 import {BaseService} from '../../shared/services/base.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {LoginService} from '../../shared/services/login.service';
-import {DatePipe} from '@angular/common';
+import {DatePipe, DecimalPipe} from '@angular/common';
 import {URLS} from '../../shared/urls';
 import {FoundItem} from '../../shared/models/found-item';
 import {MatButton, MatFabButton, MatIconButton} from '@angular/material/button';
-import {MatCard, MatCardContent, MatCardHeader, MatCardImage, MatCardTitle} from '@angular/material/card';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardHeader,
+  MatCardImage,
+  MatCardTitle
+} from '@angular/material/card';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatIcon} from '@angular/material/icon';
 import {MatInput} from '@angular/material/input';
@@ -33,7 +40,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     RouterLink,
     FormsModule,
     DatePipe,
-    MatCardHeader
+    MatCardHeader,
+    DecimalPipe,
+    MatCardActions,
+    MatCardImage
   ],
   providers: [DatePipe],
   templateUrl: './myitems.component.html',

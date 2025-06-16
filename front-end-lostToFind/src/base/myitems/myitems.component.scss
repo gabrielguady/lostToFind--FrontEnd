@@ -1,96 +1,6 @@
-.app-header {
-  /*position: fixed;*/
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 56px;
-  color: white;
-  background-color: #1C3489 !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000; /* pra sobrepor o sidenav */
-  display: flex;
-  align-items: center;
-}
-
-.lost-b {
-  color: #ffffff !important;
-}
-.lost-b:hover {
-  color: #142967 !important;
-  background-color: #ffffff !important;
-}
-
-.found-b {
-  color: #ffffff !important;
-}
-.found-b:hover {
-  color: #142967 !important;
-  background-color: #ffffff !important;
-}
-
-.user {
-  color: #ffffff !important;
-}
-.user:hover {
-  color: #142967 !important;
-  background-color: #ffffff !important;
-}
+/* items.component.scss */
 
 
-.myitem-b {
-  color: #ffffff !important;
-}
-.myitem-b:hover {
-  color: #142967 !important;
-  background-color: #ffffff !important;
-}
-
-.selected .lost-b,
-.selected .found-b,
-.selected .myitem-b{
-  background-color: #ffffff !important;
-  color: #142967 !important;
-
-  border: 1px solid #142967;
-}
-
-.logo-mask {
-  height: 37px;
-  width: 38.2px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo-mask video {
-  height: 44px;
-  width: 40.8px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: -3.5px -3.5px;
-}
-
-
-table {
-  width: 100%;
-  .mat-mdc-header-cell {
-    font-weight: bold;
-    background: black;
-    color: white;
-  }
-}
-
-.mat-mdc-form-field {
-  width: 30%;
-}
-
-.flex-container {
-  display: flex;
-  justify-content: space-between;
-
-}
 .table {
   width: 100%;
   .mat-mdc-header-cell {
@@ -116,4 +26,71 @@ table {
   padding: 16px;
   gap: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.item-card {
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  width: 260px; /* largura fixa para manter o layout consistente */
+
+  transition: box-shadow 0.3s, transform 0.3s;
+
+  &:hover {
+    box-shadow: 0 8px 24px rgba(37, 75, 186, 0.25), 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px) scale(1);
+    cursor: pointer;
+  }
+}
+
+.image-container {
+  position: relative;
+  height: 180px;
+  background: #f5f5f5;
+}
+
+.image-container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.price-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #254bba;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.item-title {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.metadata .meta-row {
+  margin-top: 4px;
+}
+
+.metadata mat-icon {
+  font-size: 20px;
+  margin-right: 6px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.metadata span {
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.description {
+  font-size: 0.95rem;
+  color: rgba(0, 0, 0, 0.65);
+  margin: 0;
 }
