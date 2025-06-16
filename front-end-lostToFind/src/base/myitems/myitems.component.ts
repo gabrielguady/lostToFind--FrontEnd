@@ -8,7 +8,7 @@ import {DatePipe} from '@angular/common';
 import {URLS} from '../../shared/urls';
 import {FoundItem} from '../../shared/models/found-item';
 import {MatButton, MatFabButton, MatIconButton} from '@angular/material/button';
-import {MatCard, MatCardContent, MatCardImage, MatCardTitle} from '@angular/material/card';
+import {MatCard, MatCardContent, MatCardHeader, MatCardImage, MatCardTitle} from '@angular/material/card';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatIcon} from '@angular/material/icon';
 import {MatInput} from '@angular/material/input';
@@ -32,9 +32,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ReactiveFormsModule,
     RouterLink,
     FormsModule,
-    MatIconButton,
     DatePipe,
-    RouterLinkActive
+    MatCardHeader
   ],
   providers: [DatePipe],
   templateUrl: './myitems.component.html',
@@ -43,77 +42,88 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 export class MyitemsComponent implements OnInit {
   public dataSource: FoundItem[] = [];
   public datalostItems: LostItem[] = [];
-  public displayedColumns = ['id', 'title', 'description', 'date_found', 'category', 'city', 'actions'];
-  public searchName: string = '';
+
+  public searchTitle: string = '';
+  public searchCity: string = '';
 
   private router: Router = new Router();
 
-  private Foundservice: BaseService<FoundItem>
-  private Lostservice: BaseService<LostItem>
-  private parameters: HttpParams = new HttpParams();
-  private loginService: LoginService;
+  private foundService: BaseService<FoundItem>;
+  private lostService: BaseService<LostItem>;
 
-  constructor(private http: HttpClient, private datePipe: DatePipe) {
-    this.Foundservice =  new BaseService<FoundItem>(http,URLS.FOUND_ITEM)
-    this.Lostservice =  new BaseService<LostItem>(http,URLS.LOST_ITEM)
+  constructor(
+    private http: HttpClient,
+    private loginService: LoginService
+  ) {
+    this.foundService = new BaseService<FoundItem>(http, URLS.FOUND_ITEM);
+    this.lostService = new BaseService<LostItem>(http, URLS.LOST_ITEM);
   }
+
   ngOnInit(): void {
-    this.searchFound();
-    this.searchLost()
+    this.search();
   }
 
-  public searchFound(resetIndex: boolean = false): void {
-    this.Foundservice.clearParameter();
-    this.Foundservice.addParameter('title', this.searchName);
-    this.Foundservice.getAll().subscribe({
+  public search(): void {
+    this.searchFound();
+    this.searchLost();
+  }
+
+  private searchFound(): void {
+    const userId = this.loginService.getCurrentUserId();
+    if (!userId) return;
+
+    this.foundService.clearParameter();
+    this.foundService.addParameter('title', this.searchTitle);
+    this.foundService.addParameter('city', this.searchCity);
+    this.foundService.addParameter('expand', ['user', 'category']);
+    this.foundService.addParameter('user_id', userId);  // <- Aqui filtra pelo usuário
+
+    this.foundService.getAll().subscribe({
       next: (data: FoundItem[]) => {
         this.dataSource = data;
       },
       error: (error) => {
-        console.error('error loading Found Item: ');
+        console.error('Error loading Found Items:', error);
       }
     });
   }
 
-  public deleteObject(id:number): void {
-    this.Foundservice.delete(id).subscribe({
-      next: (_) => {
-        this.searchFound()
-      },
-      error: (error) => {
-        console.error('error delete Found Item: ');
-      }
-    })
-  }
+  private searchLost(): void {
+    const userId = this.loginService.getCurrentUserId();
+    if (!userId) return;
 
-  public searchLost(resetIndex: boolean = false): void {
-    this.Lostservice.clearParameter();
-    this.Foundservice.addParameter('title', this.searchName);
-    this.Lostservice.getAll().subscribe({
+    this.lostService.clearParameter();
+    this.lostService.addParameter('title', this.searchTitle);
+    this.lostService.addParameter('city', this.searchCity);
+    this.lostService.addParameter('expand', ['user', 'category']);
+    this.lostService.addParameter('user_id', userId); // <- Aqui também
+
+    this.lostService.getAll().subscribe({
       next: (data: LostItem[]) => {
         this.datalostItems = data;
       },
       error: (error) => {
-        console.error('error loading Found Item: ');
+        console.error('Error loading Lost Items:', error);
       }
     });
   }
 
-  public deleteObjectLost(id:number): void {
-    this.Lostservice.delete(id).subscribe({
-      next: (_) => {
-        this.searchLost()
-      },
-      error: (error) => {
-        console.error('error delete Found Item: ');
-      }
-    })
+  public deleteFoundItem(id: number): void {
+    this.foundService.delete(id).subscribe({
+      next: () => this.searchFound(),
+      error: (error) => console.error('Error deleting Found Item:', error)
+    });
+  }
+
+  public deleteLostItem(id: number): void {
+    this.lostService.delete(id).subscribe({
+      next: () => this.searchLost(),
+      error: (error) => console.error('Error deleting Lost Item:', error)
+    });
   }
 
   public goToPage(route: string): void {
-    const extras: NavigationExtras= {queryParamsHandling: "merge"}
+    const extras: NavigationExtras = { queryParamsHandling: 'merge' };
     this.router.navigate([route], extras).then();
   }
-
-
 }

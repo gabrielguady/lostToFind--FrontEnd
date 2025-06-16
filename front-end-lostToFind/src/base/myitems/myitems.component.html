@@ -1,19 +1,30 @@
-<div class="flex justify-content-center px-4 mt-5">
-  <div class="surface-card w-full md:w-11 lg:w-10 xl:w-9 p-5 shadow-3 border-round-xl">
-
-    <h1>Meus itens</h1>
-    <div class="flex flex-column gap-1">
-      <div class="flex gap-3">
-        <mat-form-field>
+<div class="flex flex-column justify-content-center align-content-center px-4 m-5">
+  <mat-card class="m-4">
+    <mat-card-header>
+      <div class="flex flex-row justify-content-between align-items-center w-full">
+        <h2>Seus itens cadastrados</h2>
+<!--        <button mat-flat-button (click)="goToPage('lost_item/create')" class="btn-default">-->
+<!--          Cadastre um item perdido-->
+<!--        </button>-->
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="flex flex-row justify-content-between align-items-start gap-3 w-full mt-3">
+        <mat-form-field class="w-6"> <!-- Formulario -->
           <mat-label>Pesquisar titulo</mat-label>
-          <input matInput [(ngModel)]="searchName">
+          <input matInput [(ngModel)]="searchTitle">
+        </mat-form-field>
+        <mat-form-field class="w-6"> <!-- Formulario -->
+          <mat-label>Pesquisar cidade</mat-label>
+          <input matInput [(ngModel)]="searchCity">
         </mat-form-field>
 
-        <button mat-fab (click)="goToPage('lost_item/create')" class="btn-default">
-          <mat-icon>add</mat-icon>
+        <button mat-fab type="submit" (click)="search()" class="btn-default">
+          <mat-icon>search</mat-icon>
         </button>
-
       </div>
+    </mat-card-content>
+  </mat-card>
 
 
       <div class="flex flex-wrap justify-content-center gap-4">
@@ -61,6 +72,4 @@
         </div>
       }
     </div>
-  </div>
-</div>
 
