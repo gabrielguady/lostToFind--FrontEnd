@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
       this.loginService.login(username, password).subscribe({
         next: () => {
           const user = this.loginService.user;
-          console.log('Usuário logado:', user || 'não definido');
 
           // ✅ Mostrar mensagem de sucesso
           this.snackBar.open('Login bem-sucedido!', 'Fechar', {

@@ -63,8 +63,6 @@ export class SignupComponent implements OnInit {
 
     this.signupService.signup(username, password).subscribe({
       next: () => {
-        console.log('Usuário cadastrado com sucesso!');
-
         this.snackBar.open('Usuário cadastrado com sucesso!', 'Fechar', {
           duration: 4000,
           horizontalPosition: 'center',

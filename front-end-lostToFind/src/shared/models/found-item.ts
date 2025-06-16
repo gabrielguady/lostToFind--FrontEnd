@@ -1,4 +1,5 @@
 import {ModelBase} from './model-base';
+import {User} from './accounts';
 
 export class FoundItem extends ModelBase{
   title: string;
@@ -7,4 +8,5 @@ export class FoundItem extends ModelBase{
   is_resolved: boolean;
   category: string;
   city: string;
+  user: string | User;
 }

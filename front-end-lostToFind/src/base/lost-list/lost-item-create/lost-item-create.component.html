@@ -32,9 +32,9 @@
           </mat-form-field>
           <mat-form-field>
             <mat-label>Categoria</mat-label>
-            <mat-select formControlName="category">
+            <mat-select formControlName="category" required>
               @for (cat of categories; track cat) {
-                <mat-option [value]="cat.value">{{ cat.label }}</mat-option>
+                <mat-option [value]="cat.id">{{ cat.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -45,14 +45,17 @@
           </mat-form-field>
         </div>
         <button mat-flat-button class="btn-default" id="save" type="submit"
-                (click)="saveOrUpdate()"
-                [disabled]="!formGroup.valid" routerLink="/lost_item">
+                (click)="saveOrUpdateForm()"
+                [disabled]="!formGroup.valid">
           Salvar Item Perdido
         </button>
 
       </form>
 
-      <app-add-photo-lost *ngIf="itemIdEmitter" [id_item_lost]="this.object.id"></app-add-photo-lost>
+      @if (this.object.id){
+        <app-add-photo-lost [id_item_lost]=""></app-add-photo-lost>
+      }
+
     </div>
 
   </div>

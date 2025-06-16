@@ -1,5 +1,6 @@
 import {ModelBase} from './model-base';
 import {ItemCategory} from './item-category';
+import {User} from './accounts';
 
 export class LostItem extends ModelBase{
   title: string;
@@ -9,4 +10,5 @@ export class LostItem extends ModelBase{
   is_resolved: boolean;
   category: ItemCategory;
   city: string;
+  user: string | User;
 }

@@ -10,6 +10,7 @@ import {AddPhotoComponent} from '../base/add-photo-lost/add-photo.component';
 import {HomeComponent} from '../base/home/home.component'
 import {UserComponent} from '../base/user/user.component';
 import {ItemSectionComponent} from '../base/item-section/item-section.component';
+import {LostItemDetailsComponent} from '../base/lost-list/lost-item-details/lost-item-details.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -17,6 +18,7 @@ export const routes: Routes = [
   {path: 'lost_item', component: LostItemListComponent},
   {path: 'found_item', component: FoundItemListComponent},
   {path: 'lost_item/:action', component: LostItemCreateComponent},
+  {path: 'lost_item_details/:action', component: LostItemDetailsComponent},
   {path: 'found_item/:action', component: FoundItemCreateComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},

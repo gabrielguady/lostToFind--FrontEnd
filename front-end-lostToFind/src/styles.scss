@@ -1,10 +1,11 @@
 @use '@angular/material' as mat;
 @import 'primeflex/primeflex';
+@import 'ngx-toastr/toastr';
 
 $theme: mat.define-theme((
   color: (
     theme-type: light,
-    primary: mat.$cyan-palette,
+    primary: mat.$blue-palette,
     tertiary: mat.$blue-palette,
   )
 ));
@@ -53,7 +54,7 @@ table {
 @include mat.core();
 @include mat.color-variants-backwards-compatibility($theme);
 .app-header {
-  /*position: fixed;*/
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -123,4 +124,11 @@ table {
   border-radius: 50%;
   object-fit: cover;
   object-position: -3.5px -3.5px;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 2rem;
 }

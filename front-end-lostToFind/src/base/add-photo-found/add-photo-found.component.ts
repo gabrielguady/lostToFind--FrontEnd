@@ -50,7 +50,6 @@ export class AddPhotoComponent {
   onSubmit(): void {
     if (this.selectedImage) {
       const formData = new FormData();
-      console.log(this.id_item_found.toString())
       formData.append('file_obj', this.selectedImage);
       formData.append('id_item', this.id_item_found.toString());
 
@@ -58,7 +57,6 @@ export class AddPhotoComponent {
       this.http.post('http://localhost:8000/api/core/found_item/upload_file/', formData)
         .subscribe(
           response => {
-            console.log('Arquivo enviado com sucesso', response);
             this.router.navigate(['found_item']);          },
           error => {
             console.error('Erro ao enviar arquivo', error);

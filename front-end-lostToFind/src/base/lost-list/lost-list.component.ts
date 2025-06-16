@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {URLS} from '../../shared/urls';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {NavigationExtras, Router} from '@angular/router';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
@@ -12,7 +12,6 @@ import {MatButton, MatButtonModule} from '@angular/material/button';
 import {LostItem} from '../../shared/models/lost-item';
 import {BaseService} from '../../shared/services/base.service';
 import {DatePipe, DecimalPipe} from '@angular/common';
-import {LoginService} from '../../shared/services/login.service';
 
 
 @Component({
@@ -43,25 +42,21 @@ export class LostItemListComponent implements OnInit {
 
   private service: BaseService<LostItem>
 
-  private parameters: HttpParams = new HttpParams();
-
   constructor(
-    private http: HttpClient,
-    private loginService: LoginService,
-    private datePipe: DatePipe
+    http: HttpClient
   ) {
-    this.service = new BaseService<LostItem>(http, URLS.LOST_ITEM, loginService);
+    this.service = new BaseService<LostItem>(http, URLS.LOST_ITEM);
   }
 
   ngOnInit(): void {
     this.search();
-    // this.addCommentScript()
   }
 
   public search(resetIndex: boolean = false): void {
     this.service.clearParameter();
     this.service.addParameter('title', this.searchTitle);
     this.service.addParameter('city', this.searchCity);
+    this.service.addParameter('expand', ['user', 'category']);
     this.service.getAll().subscribe({
       next: (data: LostItem[]) => {
         this.dataSource = data;
@@ -76,21 +71,5 @@ export class LostItemListComponent implements OnInit {
     const extras: NavigationExtras= {queryParamsHandling: "merge"}
     this.router.navigate([route], extras).then();
   }
-
-  // addCommentScript(): void {
-  //   // Cria a tag <script> dinamicamente
-  //   const script = document.createElement('script');
-  //   script.src = 'https://utteranc.es/client.js';
-  //   script.setAttribute('repo', 'gabrielguady/LostToFind');
-  //   script.setAttribute('issue-term', 'pathname');
-  //   script.setAttribute('label', 'Comentários');
-  //   script.setAttribute('theme', 'github-light');
-  //   script.setAttribute('crossorigin', 'anonymous');
-  //   script.async = true;
-  //
-  //   // Adiciona o script ao body ou a div onde você quer que ele seja carregado
-  //   document.body.appendChild(script);
-  // }
-
 
 }

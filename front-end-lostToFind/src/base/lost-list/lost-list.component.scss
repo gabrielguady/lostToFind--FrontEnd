@@ -45,20 +45,19 @@ table {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/*.image {*/
-/*  width: 100%;*/
-/*  border-radius: 2rem;*/
-/*  object-fit: cover;*/
-/*  height: auto;*/
-/*}*/
-
-
-
-
 .item-card {
   border-radius: 8px;
   overflow: hidden;
   position: relative;
+  width: 260px; /* largura fixa para manter o layout consistente */
+
+  transition: box-shadow 0.3s, transform 0.3s;
+
+  &:hover {
+    box-shadow: 0 8px 24px rgba(37, 75, 186, 0.25), 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px) scale(1);
+    cursor: pointer;
+  }
 }
 
 .image-container {
@@ -86,7 +85,8 @@ table {
 }
 
 .item-title {
-  margin: 0;
+  margin-top: 8px;
+  margin-bottom: 8px;
   font-size: 1.2rem;
   font-weight: 500;
 }

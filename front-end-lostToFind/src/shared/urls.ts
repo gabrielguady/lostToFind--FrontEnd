@@ -3,5 +3,7 @@ export const URLS = {
   USER:'api/core/user/',
   FOUND_ITEM: 'api/core/found-items/',
   LOST_ITEM: 'api/core/lost-items/',
-  FILE_IMAGE: 'api/core/file-images/'
+  FILE_IMAGE: 'api/core/file-images/',
+  CATEGORY: 'api/core/categories/',
+  COMMENT: 'api/core/comment/'
 }
