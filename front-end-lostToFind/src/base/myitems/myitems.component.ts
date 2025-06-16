@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LostItem} from '../../shared/models/lost-item';
-import {NavigationExtras, Router, RouterLink, RouterLinkActive} from '@angular/router';
+import {NavigationExtras, Router} from '@angular/router';
 import {BaseService} from '../../shared/services/base.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {LoginService} from '../../shared/services/login.service';
@@ -12,14 +12,11 @@ import {
   MatCard,
   MatCardActions,
   MatCardContent,
-  MatCardHeader,
-  MatCardImage,
-  MatCardTitle
+  MatCardHeader, MatCardImage,
 } from '@angular/material/card';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatIcon} from '@angular/material/icon';
 import {MatInput} from '@angular/material/input';
-import {MatTooltip} from '@angular/material/tooltip';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({

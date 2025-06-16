@@ -8,7 +8,7 @@ import {MatButtonToggle} from '@angular/material/button-toggle';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatButton, MatIcon, MatIconButton, RouterLink, RouterLinkActive, MatButtonToggle],
+  imports: [RouterOutlet, MatButton, MatIcon, MatIconButton, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
