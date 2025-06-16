@@ -12,11 +12,14 @@ export interface UserData {
   refreshToken: string;
   user_id?: string;
   username?: string;
+  email?: string;
 }
 interface DecodedToken extends JwtPayload {
   user_id?: number;
   username?: string;
+  email?: string;
 }
+
 @Injectable({
   providedIn: 'root'
 })
@@ -46,8 +49,8 @@ export class LoginService {
       this.user.next(null);
     }
   }
-  signup(username: string, password: string): Observable<UserData> {
-    return this.http.post<UserData>('http://localhost:8000/api/core/user/', {username, password}).pipe(
+  signup(username: string, password: string, email: string, first_name: string, last_name: string ): Observable<UserData> {
+    return this.http.post<UserData>('http://localhost:8000/api/core/user/', {first_name, last_name, email, username, password}).pipe(
       tap((value) => {
       })
     )

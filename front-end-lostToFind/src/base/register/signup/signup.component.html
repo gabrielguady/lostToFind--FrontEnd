@@ -8,10 +8,18 @@
 >
   <form [formGroup]="signupForm" class="signup-form">
     <app-input-primary
-      formControlName="name"
+      formControlName="Firstname"
       inputName="name"
       type="text"
-      label="Name & second name"
+      label="First name"
+    >
+    </app-input-primary>
+
+    <app-input-primary
+      formControlName="Lastname"
+      inputName="name"
+      type="text"
+      label="Last name"
     >
     </app-input-primary>
 
