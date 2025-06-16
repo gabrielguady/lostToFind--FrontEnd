@@ -32,6 +32,8 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.signupForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -44,7 +46,7 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    const { username, password, confirmPassword } = this.signupForm.value;
+    const { name, username, password, confirmPassword } = this.signupForm.value;
 
     if (password !== confirmPassword) {
       console.log('As senhas não coincidem.');
