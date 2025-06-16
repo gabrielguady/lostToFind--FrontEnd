@@ -6,20 +6,23 @@ import {provideHttpClient, withFetch, withInterceptorsFromDi} from '@angular/com
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {provideAnimations} from '@angular/platform-browser/animations';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldDefaultOptions} from '@angular/material/form-field';
+import {provideToastr} from 'ngx-toastr';
 
-const appearence: MatFormFieldDefaultOptions = {
+const appearance: MatFormFieldDefaultOptions = {
   appearance: "outline"
 }
 
 export const appConfig: ApplicationConfig = {
-  providers:
-    [provideZoneChangeDetection({ eventCoalescing: true }),
-      provideRouter(routes),
-      provideClientHydration(),
-      provideHttpClient(withInterceptorsFromDi()),
-      provideHttpClient(withFetch()), provideAnimationsAsync(),
-      provideAnimations(),
-      { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: appearence }, provideAnimationsAsync(), provideAnimationsAsync(),
-    ],
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideClientHydration(),
+    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withFetch()),
+    provideAnimationsAsync(),
+    provideAnimations(),
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: appearance },
+    provideToastr()
+  ],
 
 };

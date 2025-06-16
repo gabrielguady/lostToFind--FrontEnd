@@ -36,37 +36,31 @@
 // }
 
 
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { URLS } from '../urls';
-import { HttpOptions } from '../http/http-options';
-import { FileImage } from '../models/file-image';
-import { LoginService } from './login.service';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {URLS} from '../urls';
+import {HttpOptions} from '../http/http-options';
+import {FileImage} from '../models/file-image';
 
 export class BaseService<T> {
   private fullUrl = `${URLS.BASE}`;
   private parameters = new HttpParams();
-  private loginService?: LoginService;
+  public token: string;
 
   constructor(
     public http: HttpClient,
     public path: string,
-    loginService?: LoginService
   ) {
     this.fullUrl = `${URLS.BASE}${path}`;
-    this.loginService = loginService;
+    if (typeof window !== 'undefined' && window.localStorage) {
+      this.token = localStorage.getItem('APP_ACCESS_TOKEN');
+    } else {
+      this.token = '';
+    }
   }
-
-  private getAccessToken(): string {
-    const token = this.loginService?.getAccessToken() ||
-      localStorage.getItem('APP_ACCESS_TOKEN');
-      sessionStorage.getItem('APP_ACCESS_TOKEN');
-    return token || '';
-  }
-
 
   public get headers(): HttpHeaders {
-    const accessToken = this.getAccessToken();
+    const accessToken = this.token;
 
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',

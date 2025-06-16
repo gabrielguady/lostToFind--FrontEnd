@@ -77,7 +77,6 @@ export class HomeComponent {
       // Codifica o valor para URL seguro e abre o Google Maps
       const encodedLocation = encodeURIComponent(item.value);
       window.open(`https://www.google.com/maps/search/?api=1&query=${encodedLocation}`, '_blank');
-      console.log(`Abrindo localização: ${item.text}`);
     }
   }
 }

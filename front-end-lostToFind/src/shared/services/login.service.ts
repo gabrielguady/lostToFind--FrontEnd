@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {jwtDecode, JwtPayload} from 'jwt-decode';
 import {Router, UrlTree} from '@angular/router';
 import {isPlatformBrowser} from '@angular/common';
+
 export const ACCESS_TOKEN_KEY = 'APP_ACCESS_TOKEN';
 export const REFRESH_TOKEN_KEY = 'APP_REFRESH_TOKEN';
 export interface UserData {
@@ -48,7 +49,6 @@ export class LoginService {
   signup(username: string, password: string): Observable<UserData> {
     return this.http.post<UserData>('http://localhost:8000/api/core/user/', {username, password}).pipe(
       tap((value) => {
-        console.log('cadastrado')
       })
     )
   }
@@ -69,7 +69,6 @@ export class LoginService {
           localStorage.setItem(ACCESS_TOKEN_KEY, access);
           localStorage.setItem(REFRESH_TOKEN_KEY, refresh);
           this.user.next(data);
-          console.log(data)
           return data;
         })
       );

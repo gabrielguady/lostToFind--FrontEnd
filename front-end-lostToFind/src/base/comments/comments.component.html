@@ -1,0 +1,51 @@
+<div class="flex flex-column justify-content-start align-items-start mt-2 mx-7">
+  <div class="px-4">
+    <H1>Comentários</H1>
+    @if(dataSource.length === 0){
+      <div class="lab">Nenhum comentário adicionado</div>
+    }
+  </div>
+
+  <div id="comments_list" class="comments-list px-4" >
+    @for (comment of dataSource; track comment; let i = $index) {
+      <div class="comment-item">
+        <div class="comment-header">
+          <span class="mr-1">
+            <b>{{ comment?.['user']?.['first_name'] + ' ' +  comment?.['user']?.['last_name']}}</b>
+
+          </span>
+          <span class="created-at">{{ comment?.['date_created'] | date:'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+        <div class="comment-description">
+          {{ comment?.['text'] }}
+        </div>
+      </div>
+    }
+  </div>
+
+
+  <div class="flex flex-row justify-content-center align-items-center w-full">
+    <form [formGroup]="formGroup" class="padding-message-area">
+      <div class="write flex flex-row">
+            <textarea #autosize="cdkTextareaAutosize"
+                      cdkAutosizeMinRows="1"
+                      cdkAutosizeMaxRows="6"
+                      cdkTextareaAutosize="{{true}}"
+                      maxlength="500"
+                      formControlName="text" id="input_text"
+                      placeholder="Adicionar um comentário..."></textarea>
+
+
+        <div class="flex gap-2 flex-end justify-content-start align-content-center">
+
+          <button mat-icon-button type="submit" (click)="saveOrUpdateForm(); scrollToBottom();" class="input-button">
+              <span class="material-symbols-outlined">
+                send
+              </span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>

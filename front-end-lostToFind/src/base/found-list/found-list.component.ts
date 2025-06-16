@@ -3,7 +3,7 @@ import {FoundItem} from '../../shared/models/found-item';
 import {URLS} from '../../shared/urls';
 import {BaseService} from '../../shared/services/base.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {NavigationExtras, Router, RouterLink, RouterLinkActive} from '@angular/router';
+import {NavigationExtras, Router} from '@angular/router';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
@@ -11,9 +11,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
-import {MatTooltip} from '@angular/material/tooltip';
-import {DatePipe, NgIf} from '@angular/common';
-import {LoginService} from '../../shared/services/login.service';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-item-found-list',
@@ -26,9 +24,7 @@ import {LoginService} from '../../shared/services/login.service';
     MatCardModule,
     MatInputModule,
     FormsModule,
-    MatTooltip,
-    DatePipe,
-    NgIf
+    DatePipe
   ],
   providers: [DatePipe],
   templateUrl: './found-list.component.html',
@@ -51,9 +47,8 @@ export class FoundItemListComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private datePipe: DatePipe,
-    private loginService: LoginService
   ) {
-    this.service = new BaseService<FoundItem>(http, URLS.FOUND_ITEM, loginService);
+    this.service = new BaseService<FoundItem>(http, URLS.FOUND_ITEM);
   }
 
   ngOnInit(): void {
