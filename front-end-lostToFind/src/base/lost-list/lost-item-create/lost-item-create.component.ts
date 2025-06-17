@@ -16,6 +16,7 @@ import {BaseService} from '../../../shared/services/base.service';
 import {ItemCategory} from '../../../shared/models/item-category';
 import {ToastrService} from 'ngx-toastr';
 import {ActivatedRoute} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
 
 const BASE_OPTIONS: BaseComponentOptions = {
   url: URLS.LOST_ITEM,
@@ -52,8 +53,8 @@ export class LostItemCreateComponent extends BaseComponent<LostItem> {
 
   public categoriesService: BaseService<ItemCategory>;
 
-  constructor(http: HttpClient, toast: ToastrService, activatedRoute: ActivatedRoute) {
-    super(http, BASE_OPTIONS, toast, activatedRoute);
+  constructor(http: HttpClient, toast: ToastrService, activatedRoute: ActivatedRoute,dialog: MatDialog,) {
+    super(http, BASE_OPTIONS, toast, activatedRoute, dialog);
     this.categoriesService = new BaseService<ItemCategory>(http, URLS.CATEGORY);
     this.getCategories();
   }

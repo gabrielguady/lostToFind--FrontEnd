@@ -10,6 +10,7 @@ import {CommentItem} from '../../shared/models/comment';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {CdkTextareaAutosize} from '@angular/cdk/text-field';
 import {MatIconButton} from '@angular/material/button';
+import {MatDialog} from '@angular/material/dialog';
 
 const BASE_OPTIONS = {
   url: URLS.COMMENT,
@@ -42,8 +43,9 @@ export class CommentsComponent extends BaseComponent<CommentItem> implements OnI
     http: HttpClient,
     toast: ToastrService,
     activatedRoute: ActivatedRoute,
+    dialog: MatDialog,
   ) {
-    super(http, BASE_OPTIONS, toast, activatedRoute);
+    super(http, BASE_OPTIONS, toast, activatedRoute, dialog);
   }
 
   public override ngOnInit(): void {

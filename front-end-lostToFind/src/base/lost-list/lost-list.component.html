@@ -3,9 +3,16 @@
     <mat-card-header>
       <div class="flex flex-row justify-content-between align-items-center w-full">
         <h2>Encontre itens perdidos</h2>
-        <button mat-flat-button (click)="goToPage('lost_item/create')" class="btn-default">
-          Cadastre um item perdido
-        </button>
+        <div class="flex flex-row justify-content-end align-items-center gap-3">
+          <button mat-stroked-button [ngClass]="{'is-mined': isMined}"
+                  (click)="isMined = !isMined; search()" class="btn-default">
+            Mostrar apenas meus itens
+          </button>
+          <button mat-flat-button (click)="goToPage('lost_item/create')" class="btn-default">
+            Cadastre um item perdido
+          </button>
+        </div>
+
       </div>
     </mat-card-header>
     <mat-card-content>
@@ -30,7 +37,7 @@
     @for (item of dataSource; track item.title) {
       <div class="p-grid">
         <div class="p-col-12 p-md-6 p-lg-4">
-          <mat-card class="item-card cursor-pointer" (click)="goToPage('lost_item_details/'+ item?.id)">
+          <mat-card class="item-card cursor-pointer">
             <div class="image-container">
               <img mat-card-image
                    [src]="'https://material.angular.io/assets/img/examples/shiba2.jpg'"
@@ -38,7 +45,7 @@
               />
               <span class="price-badge">R$ {{ item?.reward | number:'1.2-2' }}</span>
             </div>
-            <mat-card-content>
+            <mat-card-content (click)="goToPage((isMined ? 'lost_item/' :'lost_item_details/')+ item?.id)">
               <h3 class="item-title">{{ item?.title }}</h3>
               <div class="metadata p-d-flex p-flex-column p-ai-start p-mt-2">
                 <div class="flex flex-row justify-content-start align-items-start">
@@ -68,9 +75,23 @@
             </mat-card-content>
 
             <mat-card-actions>
-              <button mat-flat-button color="primary" (click)="goToPage('lost_item_details/'+ item?.id)" class="w-full">
-                Ver detalhes
-              </button>
+              @if (isMined) {
+                <div class="flex flex-row align-content-center justify-content-center gap-3">
+                  <button mat-flat-button color="primary" (click)="goToPage('lost_item'+ item?.id)" class="w-8">
+                    Editar Item
+                  </button>
+                  <button mat-flat-button (click)="delete(item?.id)" class="w-4 delete-b">
+                    <mat-icon>delete</mat-icon>
+                    Deletar
+                  </button>
+                </div>
+
+              } @else {
+                <button mat-flat-button color="primary" (click)="goToPage('lost_item_details/'+ item?.id)"
+                        class="w-full">
+                  Ver detalhes
+                </button>
+              }
             </mat-card-actions>
           </mat-card>
         </div>

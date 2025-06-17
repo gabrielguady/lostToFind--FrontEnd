@@ -1,7 +1,7 @@
-<div>
+<div [ngClass]="">
   <div class="app-header">
     <div class="flex align-items-center gap-2 px-3 py-2">
-      <button mat-flat-button class="home-b text-black font-bold text-xl" routerLink="/home" >Lost to Find</button>
+      <span class="text-black font-bold text-xl">Lost to Find</span>
       <div class="logo-mask">
         <video autoplay loop muted playsinline>
           <source src="assets/logo-moving.mp4" type="video/mp4"/>
@@ -9,32 +9,29 @@
       </div>
     </div>
 
-    <div class="flex gap-4 ml-auto m-3">
-      <div routerLinkActive="selected" [routerLinkActiveOptions]="{ exact: true }">
-        <button class="lost-b" mat-button routerLink="/lost_item">
-          Itens Perdidos
+    @if ( !['login', 'signup'].includes(getCurrentRoute())){
+      <div class="flex gap-4 ml-auto m-3">
+        <div routerLinkActive="selected" [routerLinkActiveOptions]="{ exact: true }">
+          <button class="lost-b" mat-button routerLink="/lost_item">
+            Itens Perdidos
+          </button>
+        </div>
+
+        <div routerLinkActive="selected" [routerLinkActiveOptions]="{ exact: true }">
+          <button class="found-b" mat-button routerLink="/found_item">
+            Itens Encontrados
+          </button>
+        </div>
+
+        <button class="user" mat-icon-button routerLink="/user">
+          <mat-icon>account_circle</mat-icon>
         </button>
       </div>
+    }
 
-      <div routerLinkActive="selected" [routerLinkActiveOptions]="{ exact: true }">
-        <button class="found-b" mat-button routerLink="/found_item">
-          Itens Encontrados
-        </button>
-      </div>
-
-      <div routerLinkActive="selected" [routerLinkActiveOptions]="{ exact: true }">
-        <button class="myitem-b" mat-button routerLink="/my_items">
-          Meus Itens
-        </button>
-      </div>
-
-      <button class="user" mat-icon-button routerLink="/user">
-        <mat-icon>account_circle</mat-icon>
-      </button>
-    </div>
   </div>
 
-  <div class="pt-7">
+  <div class="pt-6">
     <router-outlet></router-outlet>
   </div>
 

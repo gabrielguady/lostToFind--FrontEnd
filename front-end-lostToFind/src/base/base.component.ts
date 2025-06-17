@@ -3,8 +3,11 @@ import {BaseService} from '../shared/services/base.service';
 import {HttpClient} from '@angular/common/http';
 import {FormGroup} from '@angular/forms';
 import {Directive, OnInit} from '@angular/core';
-import {map, Observable, switchMap, take} from 'rxjs';
+import {map, Observable, switchMap, take, takeWhile} from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
+import {DeleteConfirmDialogComponent} from '../shared/delete-confirm-dialog/delete-confirm-dialog.component';
+import {DialogService} from 'primeng/dynamicdialog';
+import {MatDialog} from '@angular/material/dialog';
 
 
 export const handler = (event: number, callback?: (event: number) => void): void => {
@@ -37,18 +40,21 @@ export abstract class BaseComponent<T> implements OnInit {
   public pk: string = 'id';
   public toast: ToastrService;
   public activatedRoute: ActivatedRoute;
+  public dialog: MatDialog;
 
 
   protected constructor(
     http: HttpClient,
     public options: BaseComponentOptions,
     toast: ToastrService,
-    activatedRoute: ActivatedRoute
+    activatedRoute: ActivatedRoute,
+    dialog: MatDialog,
   ) {
     this.service = new BaseService<T>(http, this.options.url);
     this.pk = this.options.pk || 'id';
     this.toast = toast;
     this.activatedRoute = activatedRoute;
+    this.dialog = dialog ;
   }
 
   public ngOnInit(callback?: () => void): void {
@@ -153,5 +159,42 @@ export abstract class BaseComponent<T> implements OnInit {
         handler(EVENT.RETRIEVE, callback);
       }
     );
+  }
+
+  public stopPropagation(event: MouseEvent, stop = true): void {
+    event.preventDefault();
+    if (stop) {
+      event.stopPropagation();
+    }
+  }
+  // Delete object
+  public delete(pk: number, data: object = {}, eventMouse?: MouseEvent, callback?: (event: number) => void): boolean {
+    if (eventMouse) this.stopPropagation(eventMouse);
+    // Create delete dialog reference
+    const dialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
+      width: '40vw',
+      data: {
+        id: pk,
+        title: data['title'] ? data['title'] : 'delete',
+        message: data['message'] ? data['message'] : 'delete-confirm',
+        description: data['description'] ? data['description'] : '',
+        confirmationButton: data['confirmationButton'] ? data['confirmationButton'] : 'yes-delete',
+      },
+      disableClose: false,
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        take(1),
+        takeWhile((result: any) => !!result),
+        switchMap(() => this.service.delete(pk))
+      )
+      .subscribe(() => {
+        this.toast.success('success', data['successMessage'] ? data['successMessage'] : 'deleted-successfully');
+        handler(EVENT.DELETE, callback);
+      });
+
+    return false;
   }
 }
