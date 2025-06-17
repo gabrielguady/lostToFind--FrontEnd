@@ -5,12 +5,6 @@ import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {Card} from 'primeng/card';
 import {PrimeTemplate} from 'primeng/api';
 import {NgForOf, NgIf} from '@angular/common';
-import {ButtonDirective} from 'primeng/button';
-import {InputText} from 'primeng/inputtext';
-import {MatFormField, MatLabel} from '@angular/material/form-field';
-import {MatCard, MatCardContent} from '@angular/material/card';
-import {MatInput} from '@angular/material/input';
-import {MatIcon} from '@angular/material/icon';
 
 
 @Component({
@@ -18,21 +12,19 @@ import {MatIcon} from '@angular/material/icon';
   standalone: true,
   imports: [
     FormsModule,
-    MatButton,
     RouterLink,
     Card,
     PrimeTemplate,
     NgIf,
     NgForOf,
-    MatIcon,
-    MatIconButton,
-    RouterLinkActive
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   searchTerm = ''
+  messages: string[] = [];
+  newMessage: string = '';
 
   emailNewsletter: string = '';
 
@@ -61,6 +53,14 @@ export class HomeComponent {
       alert('Por favor, digite um e-mail válido para se inscrever.');
     }
   }
+
+  sendMessage() {
+    if (!this.newMessage.trim()) return;
+
+    this.messages.push(this.newMessage.trim());
+    this.newMessage = '';
+  }
+
 
   private isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

@@ -20,9 +20,6 @@
 
         <div class="flex flex-column justify-content-start align-items-start mr-3 w-6">
           <h1 class="item-title">{{ object?.title }}</h1>
-          <span class="price-badge">
-            R$ {{ object?.reward | number:'1.2-2' }}
-            </span>
           <div class="metadata p-d-flex p-flex-column p-ai-start mt-4 ">
             <div class="flex flex-row justify-content-start align-items-start">
               <mat-icon>person</mat-icon>
@@ -41,11 +38,11 @@
 
             <div class="flex flex-row justify-content-start align-items-start mb-4">
               <mat-icon>event</mat-icon>
-              <span>{{ object?.date_lost | date:'dd/MM/yyyy' }}</span>
+              <span>{{ object?.date_found | date:'dd/MM/yyyy' }}</span>
             </div>
             <b>Informações sobre o item:</b>
             <p class="description my-2">
-              {{ object?.last_seen_details }}
+              {{ object?.description }}
             </p>
           </div>
         </div>

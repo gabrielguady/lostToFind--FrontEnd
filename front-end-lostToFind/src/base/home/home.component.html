@@ -5,6 +5,27 @@
     Nosso compromisso é ajudar pessoas a recuperarem seus pertences perdidos.
   </p>
 
+  <div class="chat-container">
+    <div class="messages">
+      <div *ngFor="let msg of messages" class="message">
+        {{ msg }}
+      </div>
+    </div>
+
+    <form (submit)="sendMessage()" class="input-area">
+      <input
+        type="text"
+        [(ngModel)]="newMessage"
+        name="message"
+        placeholder="Me descreva seu item achado ou perdido, que eu ajudo a encontrar!"
+        autocomplete="off"
+        required
+      />
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+
+
   <div class="flex flex-column md:flex-row gap-6">
 
     <!-- Como Funciona -->

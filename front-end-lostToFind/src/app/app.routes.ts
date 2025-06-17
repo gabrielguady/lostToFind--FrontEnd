@@ -10,6 +10,7 @@ import {HomeComponent} from '../base/home/home.component'
 import {UserComponent} from '../base/user/user.component';
 import {ItemSectionComponent} from '../base/item-section/item-section.component';
 import {LostItemDetailsComponent} from '../base/lost-list/lost-item-details/lost-item-details.component';
+import {FoundItemDetailsComponent} from '../base/found-list/found-item-details/found-item-details.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -36,6 +37,10 @@ export const routes: Routes = [
   {
     path: 'found_item/:action',
     component: FoundItemCreateComponent,
+  },
+  {
+    path: 'found_item_details/:action',
+    component: FoundItemDetailsComponent,
   },
   {
     path: 'login',

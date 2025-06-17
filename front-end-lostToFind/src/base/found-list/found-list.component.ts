@@ -11,7 +11,11 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
-import {DatePipe} from '@angular/common';
+import {DatePipe, NgClass} from '@angular/common';
+import {DeleteConfirmDialogComponent} from '../../shared/delete-confirm-dialog/delete-confirm-dialog.component';
+import {switchMap, take, takeWhile} from 'rxjs';
+import {MatDialog} from '@angular/material/dialog';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-item-found-list',
@@ -24,7 +28,8 @@ import {DatePipe} from '@angular/common';
     MatCardModule,
     MatInputModule,
     FormsModule,
-    DatePipe
+    DatePipe,
+    NgClass
   ],
   providers: [DatePipe],
   templateUrl: './found-list.component.html',
@@ -38,6 +43,7 @@ export class FoundItemListComponent implements OnInit {
   public searchDescription: string =  '';
   public itemImages: { [key: number]: any[] } = {};
 
+  public isMined: boolean = false;
 
   private router: Router = new Router();
 
@@ -47,6 +53,8 @@ export class FoundItemListComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private datePipe: DatePipe,
+    public dialog: MatDialog,
+    public toast: ToastrService,
   ) {
     this.service = new BaseService<FoundItem>(http, URLS.FOUND_ITEM);
   }
@@ -70,16 +78,36 @@ export class FoundItemListComponent implements OnInit {
       }
     });
   }
-  public deleteObject(id:number): void {
-    this.service.delete(id).subscribe({
-      next: (_) => {
-        this.search()
+
+  public delete(pk: number, data: object = {}, eventMouse?: MouseEvent, callback?: (event: number) => void): boolean {
+    if (eventMouse) this.stopPropagation(eventMouse);
+    const dialogRef = this.dialog.open(DeleteConfirmDialogComponent, {
+      width: '40vw',
+      data: {
+        id: pk,
+        title: data['title'] ? data['title'] : 'delete',
+        message: data['message'] ? data['message'] : 'delete-confirm',
+        description: data['description'] ? data['description'] : '',
+        confirmationButton: data['confirmationButton'] ? data['confirmationButton'] : 'yes-delete',
       },
-      error: (error) => {
-        console.error('error delete Found Item: ');
-      }
-    })
+      disableClose: false,
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        take(1),
+        takeWhile((result: any) => !!result),
+        switchMap(() => this.service.delete(pk))
+      )
+      .subscribe(() => {
+        this.toast.success('success', data['successMessage'] ? data['successMessage'] : 'deleted-successfully');
+        this.search();
+      });
+
+    return false;
   }
+
   // carregar imagens associadas a cada FoundItem
   private loadImagesForItems(): void {
     this.dataSource.forEach(item => {
@@ -105,6 +133,13 @@ export class FoundItemListComponent implements OnInit {
   public goToPage(route: string): void {
     const extras: NavigationExtras= {queryParamsHandling: "merge"}
     this.router.navigate([route], extras).then();
+  }
+
+  public stopPropagation(event: MouseEvent, stop = true): void {
+    event.preventDefault();
+    if (stop) {
+      event.stopPropagation();
+    }
   }
 
 

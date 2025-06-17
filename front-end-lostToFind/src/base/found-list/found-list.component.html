@@ -3,9 +3,15 @@
     <mat-card-header>
       <div class="flex flex-row justify-content-between align-items-between w-full">
         <h2>Itens recentemente encontrados</h2>
-        <button mat-raised-button (click)="goToPage('found_item/create')" class="btn-default">
-          Cadastre um item encontrado
-        </button>
+        <div class="flex flex-row justify-content-end align-items-center gap-3">
+          <button mat-stroked-button [ngClass]="{'is-mined': isMined}"
+                  (click)="isMined = !isMined; search()" class="btn-default">
+            Mostrar apenas meus itens
+          </button>
+          <button mat-flat-button (click)="goToPage('found_item/create')" class="btn-default">
+            Cadastre um item encontrado
+          </button>
+        </div>
       </div>
     </mat-card-header>
     <mat-card-content>
@@ -30,70 +36,66 @@
     @for (item of dataSource; track item.title) {
       <div class="p-grid">
         <div class="p-col-12 p-md-6 p-lg-4">
-        <mat-card class="item-card cursor-pointer" (click)="goToPage('photo')">
-          <div class="image-container">
+          <mat-card class="item-card cursor-pointer">
+            <div class="image-container">
 
-            <img mat-card-image
-                 [src]="'https://material.angular.io/assets/img/examples/shiba2.jpg'"
-                 [alt]="'imgSrc'"
-            />
+              <img mat-card-image
+                   [src]="'https://material.angular.io/assets/img/examples/shiba2.jpg'"
+                   [alt]="'imgSrc'"
+              />
             </div>
 
-            <!-- Conteúdo à direita -->
-<!--            <mat-card-content>-->
-<!--              <h3 class="item-title">{{ item.title }}</h3>-->
-<!--              <div class="metadata p-d-flex p-flex-column p-ai-start p-mt-2">-->
-<!--                <div class="p-d-flex p-ai-center meta-row">-->
-<!--                  <mat-icon>location_on</mat-icon>-->
-<!--                  <span>{{ item.city }}</span>-->
-<!--                </div>-->
+            <mat-card-content (click)="goToPage((isMined ? 'found_item/' :'found_item_details/')+ item?.id)">
+              <h3 class="item-title">{{ item?.title }}</h3>
+              <div class="metadata p-d-flex p-flex-column p-ai-start p-mt-2">
+                <div class="flex flex-row justify-content-start align-items-start">
+                  <mat-icon>person</mat-icon>
+                  <span>{{ item?.user?.['first_name'] + " " + item?.user?.['last_name'] }}</span>
+                </div>
 
-<!--                <div class="p-d-flex p-ai-center meta-row">-->
-<!--                  <mat-icon>event</mat-icon>-->
-<!--                  <span>{{ item.date_found | date:'dd/MM/yyyy' }}</span>-->
-<!--                </div>-->
-<!--                <p class="description p-mt-2">{{ item.description }}</p>-->
-<!--              </div>-->
-<!--            </mat-card-content>-->
+                <div class="flex flex-row justify-content-start align-items-start">
+                  <mat-icon>tag</mat-icon>
+                  <span>{{ item?.category?.['name'] }}</span>
+                </div>
 
-          <mat-card-content>
-            <h3 class="item-title">{{ item?.title }}</h3>
-            <div class="metadata p-d-flex p-flex-column p-ai-start p-mt-2">
-              <div class="flex flex-row justify-content-start align-items-start">
-                <mat-icon>person</mat-icon>
-                <span>{{ item?.user?.['first_name'] + " " + item?.user?.['last_name'] }}</span>
+                <div class="flex flex-row justify-content-start align-items-start">
+                  <mat-icon>location_on</mat-icon>
+                  <span>{{ item?.city }}</span>
+                </div>
+
+                <div class="flex flex-row justify-content-start align-items-start">
+                  <mat-icon>event</mat-icon>
+                  <span>{{ item?.date_found | date:'dd/MM/yyyy' }}</span>
+                </div>
+
+                <p class="description my-2 ellipsis">
+                  {{ item?.description }}
+                </p>
               </div>
-
-              <div class="flex flex-row justify-content-start align-items-start">
-                <mat-icon>tag</mat-icon>
-                <span>{{ item?.category?.['name']}}</span>
-              </div>
-
-              <div class="flex flex-row justify-content-start align-items-start">
-                <mat-icon>location_on</mat-icon>
-                <span>{{ item?.city }}</span>
-              </div>
-
-              <div class="flex flex-row justify-content-start align-items-start">
-                <mat-icon>event</mat-icon>
-                <span>{{ item?.date_found | date:'dd/MM/yyyy' }}</span>
-              </div>
-
-              <p class="description my-2 ellipsis">
-                {{ item?.description }}
-              </p>
-            </div>
-          </mat-card-content>
+            </mat-card-content>
 
             <mat-card-actions>
-              <button mat-raised-button color="primary" (click)="goToPage('photo')" class="w-full">
-                Ver detalhes
-              </button>
+              @if (isMined) {
+                <div class="flex flex-row align-content-center justify-content-center gap-3">
+                  <button mat-flat-button color="primary" (click)="goToPage('found_item'+ item?.id)" class="w-8">
+                    Editar Item
+                  </button>
+                  <button mat-flat-button (click)="delete(item?.id)" class="w-4 delete-b">
+                    <mat-icon>delete</mat-icon>
+                    Deletar
+                  </button>
+                </div>
+
+              } @else {
+                <button mat-flat-button color="primary" (click)="goToPage('found_item_details/'+ item?.id)"
+                        class="w-full">
+                  Ver detalhes
+                </button>
+              }
             </mat-card-actions>
           </mat-card>
         </div>
       </div>
-
     }
   </div>
 
