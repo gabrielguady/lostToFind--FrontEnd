@@ -113,6 +113,11 @@ export class BaseService<T> {
     return this.http.post<T>(url, entity, this.getOptions());
   }
 
+  public searchAI(entity: object): Observable<T[]> {
+    const url = this.fullUrl+'search_ai/';
+    return this.http.post<T[]>(url, entity, this.getOptions());
+  }
+
   public update(id: number | string, entity: any): Observable<T> {
     this.clearParameter();
     const url = `${this.fullUrl}${id}/`;

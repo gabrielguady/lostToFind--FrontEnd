@@ -10,7 +10,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
-import {FormsModule} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {DatePipe, NgClass} from '@angular/common';
 import {DeleteConfirmDialogComponent} from '../../shared/delete-confirm-dialog/delete-confirm-dialog.component';
 import {switchMap, take, takeWhile} from 'rxjs';
@@ -31,7 +31,8 @@ import {LoginService} from '../../shared/services/login.service';
     MatInputModule,
     FormsModule,
     DatePipe,
-    NgClass
+    NgClass,
+    ReactiveFormsModule
   ],
   providers: [DatePipe],
   templateUrl: './found-list.component.html',
@@ -39,10 +40,9 @@ import {LoginService} from '../../shared/services/login.service';
 })
 export class FoundItemListComponent implements OnInit {
   public searchTitle: string = '';
+  public searchAIText: string = '';
   public dataSource: FoundItem[] = [];
-  public searchName: string = '';
-  public searchCity: string = '';
-  public searchDescription: string = '';
+  public searchCity: string='';
   public itemImages: { [key: number]: any[] } = {};
 
   public isMined: boolean = false;
@@ -52,17 +52,22 @@ export class FoundItemListComponent implements OnInit {
   private service: BaseService<FoundItem>
   private parameters: HttpParams = new HttpParams();
 
+  public formSearch: FormGroup;
+
   constructor(
     private http: HttpClient,
     public dialog: MatDialog,
-    public toast: ToastrService,
     private loginService: LoginService,
+    public toast: ToastrService,
   ) {
     this.service = new BaseService<FoundItem>(http, URLS.FOUND_ITEM);
   }
 
   ngOnInit(): void {
     this.search();
+    this.formSearch = new FormGroup({
+      lost_description: new FormControl('', [Validators.required]),
+    });
   }
 
   public search(resetIndex: boolean = false): void {
@@ -82,6 +87,17 @@ export class FoundItemListComponent implements OnInit {
       error: (error) => {
         console.error('error loading Lost Item: ');
       }
+    });
+  }
+
+  public searchAI(): void {
+    this.service.clearParameter();
+    this.service.addParameter('expand', ['user', 'category']);
+    const payload = {
+      lost_description: this.searchAIText,
+    }
+    this.service.searchAI(payload).subscribe((data: FoundItem[])=>{
+      this.dataSource = data;
     });
   }
 
@@ -137,7 +153,7 @@ export class FoundItemListComponent implements OnInit {
   }
 
   public goToPage(route: string): void {
-    const extras: NavigationExtras = {queryParamsHandling: "merge"}
+    const extras: NavigationExtras= {queryParamsHandling: "merge"}
     this.router.navigate([route], extras).then();
   }
 

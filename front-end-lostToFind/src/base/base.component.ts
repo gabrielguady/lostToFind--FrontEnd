@@ -33,7 +33,7 @@ export interface BaseComponentOptions {
 
 @Directive()
 export abstract class BaseComponent<T> implements OnInit {
-  private router: Router = new Router();
+  protected router: Router = new Router();
   public service: BaseService<T>;
   public formGroup: FormGroup;
   public object: T = {} as T;
@@ -41,6 +41,7 @@ export abstract class BaseComponent<T> implements OnInit {
   public toast: ToastrService;
   public activatedRoute: ActivatedRoute;
   public dialog: MatDialog;
+  public data: T;
 
 
   protected constructor(
