@@ -1,1 +1,64 @@
-<p>found-item-details works!</p>
+<div class="flex flex-column justify-content-center align-items-center mt-3 mx-7">
+  <mat-card class="item-card w-full">
+    <mat-card-content>
+      <div class="flex flex-row justify-content-center align-items-start w-full">
+        <div class="carousel-container w-6">
+          <button mat-icon-button (click)="prevImage()" class="btn-default">
+              <span class="material-symbols-outlined">
+                chevron_left
+              </span>
+          </button>
+
+          <img [src]="images[currentImage]" alt="Imagem do item" class="carousel-img"/>
+
+          <button mat-icon-button (click)="nextImage()" class="btn-default">
+              <span class="material-symbols-outlined">
+                chevron_right
+              </span>
+          </button>
+        </div>
+
+        <div class="flex flex-column justify-content-start align-items-start mr-3 w-6">
+          <h1 class="item-title">{{ object?.title }}</h1>
+          <span class="price-badge">
+            R$ {{ object?.reward | number:'1.2-2' }}
+            </span>
+          <div class="metadata p-d-flex p-flex-column p-ai-start mt-4 ">
+            <div class="flex flex-row justify-content-start align-items-start">
+              <mat-icon>person</mat-icon>
+              <span>{{ object?.user?.['first_name'] + " " + object?.user?.['last_name'] }}</span>
+            </div>
+
+            <div class="flex flex-row justify-content-start align-items-start">
+              <mat-icon>tag</mat-icon>
+              <span>{{ object?.category?.['name']}}</span>
+            </div>
+
+            <div class="flex flex-row justify-content-start align-items-start">
+              <mat-icon>location_on</mat-icon>
+              <span>{{ object?.city }}</span>
+            </div>
+
+            <div class="flex flex-row justify-content-start align-items-start mb-4">
+              <mat-icon>event</mat-icon>
+              <span>{{ object?.date_lost | date:'dd/MM/yyyy' }}</span>
+            </div>
+            <b>Informações sobre o item:</b>
+            <p class="description my-2">
+              {{ object?.last_seen_details }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+    </mat-card-content>
+  </mat-card>
+
+  <app-comments
+    class="w-full"
+    [type]="'lost'"
+    [itemId]="object?.id"
+  ></app-comments>
+</div>
+
