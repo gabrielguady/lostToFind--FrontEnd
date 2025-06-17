@@ -1,57 +1,54 @@
-<app-default-login-layout
-  title="Signup into a new account!"
-  primaryBtnText="Signup Now"
-  secondaryBtnText="Login Now"
-  (submit)="submit()"
-  (navigate)="navigate('login')"
-  [isDisabled]="!signupForm.valid"
->
-  <form [formGroup]="signupForm" class="signup-form">
-    <app-input-primary
-      formControlName="first_name"
-      inputName="name"
-      type="text"
-      label="First name"
-    >
-    </app-input-primary>
+<div class="flex flex-column m-9 w-full align-items-center justify-content-center">
+  <mat-card class="card mt-6 flex flex-column align-items-center justify-content-center">
+    <mat-card-header>
+      <h1 class="login-title">
+        Crie uma nova conta
+      </h1>
+    </mat-card-header>
 
-    <app-input-primary
-      formControlName="last_name"
-      inputName="name"
-      type="text"
-      label="Last name"
-    >
-    </app-input-primary>
+    <mat-card-content  class="flex flex-column align-items-center justify-content-center gap-2 w-full mx-4">
+      <form [formGroup]="formGroup"
+            class="flex flex-column align-items-center justify-content-center gap-2 w-full mx-4">
+        <mat-form-field class="w-8">
+          <mat-label>Nome</mat-label>
+          <input matInput type="text" formControlName="first_name" required>
+          <mat-error>Campo Inválido</mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-8">
+          <mat-label>Sobrenome</mat-label>
+          <input matInput type="text" formControlName="last_name" required>
+          <mat-error>Campo Inválido</mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-8">
+          <mat-label>E-mail</mat-label>
+          <input matInput type="email" formControlName="email" required>
+          <mat-error>Campo Inválido</mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-8">
+          <mat-label>Senha</mat-label>
+          <input matInput type="password" formControlName="password" required>
+          <mat-error>Campo Inválido</mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-8">
+          <mat-label>Confirmar Senha</mat-label>
+          <input matInput type="password" formControlName="confirmPassword" required>
+          <mat-error>Campo Inválido</mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
 
-    <app-input-primary
-      formControlName="email"
-      inputName="e-mail"
-      type="text"
-      label="E-mail"
-    >
-    </app-input-primary>
+    <mat-card-actions class="w-full">
+      <div class="flex flex-column align-content-center justify-content-center gap-4 w-full px-6 pb-3">
+        <button mat-flat-button type="submit" class="w-full"
+                (click)="saveOrUpdateForm()" [disabled]="!formGroup.valid">
+          Criar nova conta
+        </button>
+        <button mat-raised-button type="button" (click)="goToPage('login')">
+          Logar em uma conta existente
+        </button>
+      </div>
 
-    <app-input-primary
-      formControlName="username"
-      inputName="username"
-      type="text"
-      label="Username"
-    >
-    </app-input-primary>
-    <app-input-primary
-      formControlName="password"
-      inputName="password"
-      type="password"
-      label="Password"
-    >
-    </app-input-primary>
-    <app-input-primary
-      formControlName="confirmPassword"
-      inputName="confirmPassword"
-      type="password"
-      label="Confirm Password"
-    >
-    </app-input-primary>
-  </form>
+    </mat-card-actions>
+  </mat-card>
 
-</app-default-login-layout>
+</div>

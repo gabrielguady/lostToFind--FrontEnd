@@ -15,6 +15,7 @@ import {AddPhotoComponent} from '../../add-photo-found/add-photo-found.component
 import {BaseComponent, BaseComponentOptions} from '../../base.component';
 import {ToastrService} from 'ngx-toastr';
 import {ActivatedRoute} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
 
 const BASE_OPTIONS: BaseComponentOptions = {
   url: URLS.FOUND_ITEM,
@@ -58,8 +59,8 @@ export class FoundItemCreateComponent extends BaseComponent<FoundItem> {
     {value: 6, label: 'Outros'},
   ];
 
-  constructor(http: HttpClient, toast: ToastrService,activatedRoute: ActivatedRoute) {
-    super(http, BASE_OPTIONS, toast, activatedRoute)
+  constructor(http: HttpClient, toast: ToastrService,activatedRoute: ActivatedRoute, dialog: MatDialog,) {
+    super(http, BASE_OPTIONS, toast, activatedRoute, dialog)
   }
 
   public createFormGroup(): void {

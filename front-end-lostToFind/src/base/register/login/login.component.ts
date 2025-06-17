@@ -1,22 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
-import { LoginService } from '../../../shared/services/login.service';
-import { DefaultLoginLayoutComponent } from '../default-login-layout/default-login-layout.component';
-import {InputPrimaryComponent} from '../input-primary/input-primary.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {NavigationExtras, Router} from '@angular/router';
+import {LoginService} from '../../../shared/services/login.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
+import {MatInput} from '@angular/material/input';
+import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from '@angular/material/card';
+import {MatButton} from '@angular/material/button';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    DefaultLoginLayoutComponent,
     FormsModule,
     ReactiveFormsModule,
-    InputPrimaryComponent,
+    MatError,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    MatCard,
+    MatCardHeader,
+    MatCardContent,
+    MatButton,
+    MatCardActions,
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
 
@@ -25,7 +35,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private toast: ToastrService,
   ) {}
 
   ngOnInit() {
@@ -42,22 +52,13 @@ export class LoginComponent implements OnInit {
       this.loginService.login(username, password).subscribe({
         next: () => {
           const user = this.loginService.user;
-
-          // ✅ Mostrar mensagem de sucesso
-          this.snackBar.open('Login bem-sucedido!', 'Fechar', {
-            duration: 4000,
-            horizontalPosition: 'center',
-            verticalPosition: 'bottom',
-          });
+          this.toast.success('Login bem-sucedido!');
           this.navigate('home');
         },
         error: (err) => {
           console.error('Erro ao fazer login:', err);
-          this.snackBar.open('Erro no login. Verifique suas credenciais.', 'Fechar', {
-            duration: 4000,
-            horizontalPosition: 'center',
-            verticalPosition: 'bottom',
-          });
+          this.toast.error('Erro no login. Verifique suas credenciais.');
+
         }
       });
     }

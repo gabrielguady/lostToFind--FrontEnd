@@ -1,0 +1,21 @@
+<mat-toolbar class="mat-dialog-header">
+    <span class="flex-auto">{{ data?.title}}</span>
+    <button mat-icon-button (click)="close(false)">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+
+<mat-dialog-content class="flex flex-column align-items-center justify-content-center gap-2">
+    <div>{{ data?.message}}</div>
+    <div class="mt-2"><strong>{{ data?.description}}</strong></div>
+
+    <div class="flex flex-row align-items-center justify-content-between gap-3 mt-2">
+        <button mat-stroked-button color="warn" type="button" id="cancel" (click)="close(false)">
+            {{ data.cancel}}
+        </button>
+
+        <button mat-flat-button color="accent" id="save" type="submit" (click)="close(true)">
+            {{ data?.confirmationButton}}
+        </button>
+    </div>
+</mat-dialog-content>

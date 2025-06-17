@@ -13,6 +13,7 @@ import {MatCard, MatCardContent} from '@angular/material/card';
 import {MatIcon} from '@angular/material/icon';
 import {MatIconButton} from '@angular/material/button';
 import {CommentsComponent} from '../../comments/comments.component';
+import {MatDialog} from '@angular/material/dialog';
 
 const BASE_OPTIONS: BaseComponentOptions = {
   url: URLS.LOST_ITEM,
@@ -52,8 +53,8 @@ export class LostItemDetailsComponent extends BaseComponent<LostItem> {
 
   public categoriesService: BaseService<ItemCategory>;
 
-  constructor(http: HttpClient, toast: ToastrService, activatedRoute: ActivatedRoute) {
-    super(http, BASE_OPTIONS, toast, activatedRoute);
+  constructor(http: HttpClient, toast: ToastrService, activatedRoute: ActivatedRoute,dialog: MatDialog,) {
+    super(http, BASE_OPTIONS, toast, activatedRoute, dialog);
     this.categoriesService = new BaseService<ItemCategory>(http, URLS.CATEGORY);
     this.getCategories();
   }

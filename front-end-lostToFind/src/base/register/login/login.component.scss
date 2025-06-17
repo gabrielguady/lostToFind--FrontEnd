@@ -1,3 +1,20 @@
+.login-form {
+  display: flex;
+  margin-top: 1rem;
+  width: 100%;
+  flex-direction: column;
+  font-size: 20px;
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: center;
+}
+.forgot-pass{
+  font-size: 14px;
+  text-decoration: underline;
+  color: #FFFFFF;
+  text-align: end;
+}
+
 main{
   display: flex;
   flex-direction: row;
@@ -34,7 +51,7 @@ main{
   }
   .login-content {
     display: flex;
-    margin-top: 52px;
+    margin: 2rem;
     width: 100%;
     flex-direction: column;
     align-items: center;
@@ -43,57 +60,7 @@ main{
     font-size: 20px;
     font-weight: 700;
     text-align: center;
-    margin: 0;
-  }
-  .login-button {
-    border-radius: 20px;
-    background-color: #fff;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    width: 200px;
-    max-width: 100%;
-    color: #000;
-    padding: 13px 31px;
-    font: 500 22px Ubuntu, sans-serif;
-    border: none;
-    cursor: pointer;
-    align-self: center;
-  }
-  .login-button:hover {
-    background-color: #cdcdcd;
-  }
-
-  .divider{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    color: #FFFFFF;
-    flex-grow: 1;
-    font-weight: bold;
-  }
-  .signup-button {
-    border-radius: 20px;
-    background-color: #fff;
-    margin-top: 40px;
-    width: 200px;
-    max-width: 100%;
-    color: #000;
-    padding: 13px 31px;
-    border: none;
-    font: 500 22px Ubuntu, sans-serif;
-    cursor: pointer;
-    align-self: center;
-  }
-  .signup-button:hover {
-    background-color: #cdcdcd;
-  }
-
-  .login-button:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
-  .image-section{
+    color: #1C3489;
   }
 
   .lost-finder-text {
