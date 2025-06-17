@@ -10,12 +10,14 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
-import {FormsModule} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {DatePipe, NgClass} from '@angular/common';
 import {DeleteConfirmDialogComponent} from '../../shared/delete-confirm-dialog/delete-confirm-dialog.component';
 import {switchMap, take, takeWhile} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {ToastrService} from 'ngx-toastr';
+import {LostItem} from '../../shared/models/lost-item';
+import {LoginService} from '../../shared/services/login.service';
 
 @Component({
   selector: 'app-item-found-list',
@@ -29,7 +31,8 @@ import {ToastrService} from 'ngx-toastr';
     MatInputModule,
     FormsModule,
     DatePipe,
-    NgClass
+    NgClass,
+    ReactiveFormsModule
   ],
   providers: [DatePipe],
   templateUrl: './found-list.component.html',
@@ -37,10 +40,9 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class FoundItemListComponent implements OnInit {
   public searchTitle: string = '';
+  public searchAIText: string = '';
   public dataSource: FoundItem[] = [];
-  public searchName: string = '';
   public searchCity: string='';
-  public searchDescription: string =  '';
   public itemImages: { [key: number]: any[] } = {};
 
   public isMined: boolean = false;
@@ -50,10 +52,12 @@ export class FoundItemListComponent implements OnInit {
   private service: BaseService<FoundItem>
   private parameters: HttpParams = new HttpParams();
 
+  public formSearch: FormGroup;
+
   constructor(
     private http: HttpClient,
-    private datePipe: DatePipe,
     public dialog: MatDialog,
+    private loginService: LoginService,
     public toast: ToastrService,
   ) {
     this.service = new BaseService<FoundItem>(http, URLS.FOUND_ITEM);
@@ -61,21 +65,39 @@ export class FoundItemListComponent implements OnInit {
 
   ngOnInit(): void {
     this.search();
+    this.formSearch = new FormGroup({
+      lost_description: new FormControl('', [Validators.required]),
+    });
   }
 
   public search(resetIndex: boolean = false): void {
     this.service.clearParameter();
-    this.service.addParameter('title', this.searchName);
-    this.service.addParameter('description', this.searchDescription);
+    this.service.addParameter('title', this.searchTitle);
     this.service.addParameter('city', this.searchCity);
+
+    if (this.isMined) {
+      this.service.addParameter('user', this.loginService.getCurrentUserId());
+    }
+
+    this.service.addParameter('expand', ['user', 'category']);
     this.service.getAll().subscribe({
       next: (data: FoundItem[]) => {
         this.dataSource = data;
-        this.loadImagesForItems();
       },
       error: (error) => {
-        console.error('error loading Found Item: ');
+        console.error('error loading Lost Item: ');
       }
+    });
+  }
+
+  public searchAI(): void {
+    this.service.clearParameter();
+    this.service.addParameter('expand', ['user', 'category']);
+    const payload = {
+      lost_description: this.searchAIText,
+    }
+    this.service.searchAI(payload).subscribe((data: FoundItem[])=>{
+      this.dataSource = data;
     });
   }
 
