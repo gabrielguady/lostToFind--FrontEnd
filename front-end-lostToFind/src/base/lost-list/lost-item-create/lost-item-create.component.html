@@ -50,6 +50,18 @@
           Salvar Item Perdido
         </button>
 
+        <div class="flex flex-column">
+          <label for="file">Imagem do Item</label>
+          <input
+            type="file"
+            id="file"
+            (change)="onFileSelected($event)"
+            accept="image/*"
+          />
+        </div>
+
+
+
       </form>
 
       @if (this.object.id){

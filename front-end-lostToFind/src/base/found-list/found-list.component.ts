@@ -16,6 +16,8 @@ import {DeleteConfirmDialogComponent} from '../../shared/delete-confirm-dialog/d
 import {switchMap, take, takeWhile} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {ToastrService} from 'ngx-toastr';
+import {LostItem} from '../../shared/models/lost-item';
+import {LoginService} from '../../shared/services/login.service';
 
 @Component({
   selector: 'app-item-found-list',
@@ -39,8 +41,8 @@ export class FoundItemListComponent implements OnInit {
   public searchTitle: string = '';
   public dataSource: FoundItem[] = [];
   public searchName: string = '';
-  public searchCity: string='';
-  public searchDescription: string =  '';
+  public searchCity: string = '';
+  public searchDescription: string = '';
   public itemImages: { [key: number]: any[] } = {};
 
   public isMined: boolean = false;
@@ -52,9 +54,9 @@ export class FoundItemListComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private datePipe: DatePipe,
     public dialog: MatDialog,
     public toast: ToastrService,
+    private loginService: LoginService,
   ) {
     this.service = new BaseService<FoundItem>(http, URLS.FOUND_ITEM);
   }
@@ -65,16 +67,20 @@ export class FoundItemListComponent implements OnInit {
 
   public search(resetIndex: boolean = false): void {
     this.service.clearParameter();
-    this.service.addParameter('title', this.searchName);
-    this.service.addParameter('description', this.searchDescription);
+    this.service.addParameter('title', this.searchTitle);
     this.service.addParameter('city', this.searchCity);
+
+    if (this.isMined) {
+      this.service.addParameter('user', this.loginService.getCurrentUserId());
+    }
+
+    this.service.addParameter('expand', ['user', 'category']);
     this.service.getAll().subscribe({
       next: (data: FoundItem[]) => {
         this.dataSource = data;
-        this.loadImagesForItems();
       },
       error: (error) => {
-        console.error('error loading Found Item: ');
+        console.error('error loading Lost Item: ');
       }
     });
   }
@@ -131,7 +137,7 @@ export class FoundItemListComponent implements OnInit {
   }
 
   public goToPage(route: string): void {
-    const extras: NavigationExtras= {queryParamsHandling: "merge"}
+    const extras: NavigationExtras = {queryParamsHandling: "merge"}
     this.router.navigate([route], extras).then();
   }
 

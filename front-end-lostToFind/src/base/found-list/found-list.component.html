@@ -15,7 +15,7 @@
       </div>
     </mat-card-header>
     <mat-card-content>
-      <div class="flex flex-row justify-content-between align-content-between gap-3 w-full">
+      <div class="flex flex-row justify-content-between align-content-center gap-3 w-full">
         <mat-form-field class="w-6"> <!-- Formulario -->
           <mat-label>Pesquisar titulo</mat-label>
           <input matInput [(ngModel)]="searchTitle">
@@ -97,11 +97,12 @@
         </div>
       </div>
     }
+    @if (dataSource.length === 0) {
+      <div class="flex flex-center">
+        <h2>Nenhum Item encontrado</h2>
+      </div>
+    }
   </div>
 
-  @if (dataSource.length === 0) {
-    <div class="flex flex-center">
-      <h2>Nenhum Item encontrado</h2>
-    </div>
-  }
+
 </div>

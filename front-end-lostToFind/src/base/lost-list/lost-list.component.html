@@ -97,11 +97,12 @@
         </div>
       </div>
     }
+    @if (dataSource.length === 0) {
+      <div class="flex flex-center">
+        <h2>Nenhum Item encontrado</h2>
+      </div>
+    }
   </div>
 
-  @if (dataSource.length === 0) {
-    <div class="flex flex-center">
-      <h2>Nenhum Item encontrado</h2>
-    </div>
-  }
+
 </div>

@@ -14,6 +14,7 @@ import {MatIcon} from '@angular/material/icon';
 import {MatIconButton} from '@angular/material/button';
 import {CommentsComponent} from '../../comments/comments.component';
 import {MatDialog} from '@angular/material/dialog';
+import {MatTooltip} from '@angular/material/tooltip';
 
 const BASE_OPTIONS: BaseComponentOptions = {
   url: URLS.LOST_ITEM,
@@ -34,7 +35,7 @@ const BASE_OPTIONS: BaseComponentOptions = {
     MatCardContent,
     MatIcon,
     MatIconButton,
-    CommentsComponent
+    CommentsComponent,
   ],
   templateUrl: './lost-item-details.component.html',
   styleUrl: './lost-item-details.component.scss'

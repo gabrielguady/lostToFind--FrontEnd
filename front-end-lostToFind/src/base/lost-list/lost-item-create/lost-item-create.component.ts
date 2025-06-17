@@ -50,6 +50,7 @@ const BASE_OPTIONS: BaseComponentOptions = {
 export class LostItemCreateComponent extends BaseComponent<LostItem> {
   @Output() itemIdEmitter: EventEmitter<any> = new EventEmitter<any>();
   public categories: ItemCategory[];
+  selectedImage: File | null = null;
 
   public categoriesService: BaseService<ItemCategory>;
 
@@ -57,6 +58,18 @@ export class LostItemCreateComponent extends BaseComponent<LostItem> {
     super(http, BASE_OPTIONS, toast, activatedRoute, dialog);
     this.categoriesService = new BaseService<ItemCategory>(http, URLS.CATEGORY);
     this.getCategories();
+  }
+
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = (e: any) => {
+        this.selectedImage = file;  // Armazenando o arquivo selecionado
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   public getCategories(): void {

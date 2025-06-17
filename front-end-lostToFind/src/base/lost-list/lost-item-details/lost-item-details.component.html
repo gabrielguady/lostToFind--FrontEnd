@@ -47,15 +47,10 @@
             <p class="description my-2">
               {{ object?.last_seen_details }}
             </p>
-            <input
-              type="file"
-              class="flex-row-reverse"
-              matTooltip="Selecione uma imagem"
-              (change)="onFileSelected($event)"
-            />
+
+          </div>
           </div>
         </div>
-      </div>
 
 
     </mat-card-content>
@@ -67,4 +62,6 @@
     [itemId]="object?.id"
   ></app-comments>
 </div>
+
+
 
