@@ -1,46 +1,42 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular/core';
-import {FoundItem} from '../../../shared/models/found-item';
-import {URLS} from '../../../shared/urls';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
+import {URLS} from '../../../shared/urls';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {AutofocusDirective} from '../../../shared/directives/auto-focus-directive';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
 import {MatOption, provideNativeDateAdapter} from '@angular/material/core';
-import {MatSelect} from '@angular/material/select';
-import {NgIf} from '@angular/common';
-import {AddPhotoComponent} from '../../add-photo-found/add-photo-found.component';
 import {BaseComponent, BaseComponentOptions} from '../../base.component';
+import {BaseService} from '../../../shared/services/base.service';
+import {ItemCategory} from '../../../shared/models/item-category';
 import {ToastrService} from 'ngx-toastr';
 import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
+import {FoundItem} from '../../../shared/models/found-item';
+import {MatSelect} from '@angular/material/select';
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
 
 const BASE_OPTIONS: BaseComponentOptions = {
   url: URLS.FOUND_ITEM,
   nextRouter: 'found_item',
+  retrieveOnInit: true
 }
 
 @Component({
   selector: 'app-found-item-create',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
-
-    AutofocusDirective,
-
+    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatDatepickerInput,
-    MatDatepickerToggle,
-    MatDatepicker,
+    ReactiveFormsModule,
     MatSelect,
+    MatDatepicker,
+    MatDatepickerToggle,
     MatOption,
-    AddPhotoComponent,
-    NgIf,
-    AddPhotoComponent
+    MatDatepickerInput,
+
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [provideNativeDateAdapter()],
@@ -48,28 +44,32 @@ const BASE_OPTIONS: BaseComponentOptions = {
   styleUrl: './found-item-create.component.scss'
 })
 export class FoundItemCreateComponent extends BaseComponent<FoundItem> {
-
   @Output() itemIdEmitter: EventEmitter<any> = new EventEmitter<any>();
-  public categories: { value: number, label: string }[] = [
-    {value: 1, label: 'Acessórios'},
-    {value: 2, label: 'Documentos pessoais'},
-    {value: 3, label: 'Eletrônicos'},
-    {value: 4, label: 'Cartão de crédito'},
-    {value: 5, label: 'Pets'},
-    {value: 6, label: 'Outros'},
-  ];
+  public categories: ItemCategory[];
+  selectedImage: File | null = null;
 
-  constructor(http: HttpClient, toast: ToastrService,activatedRoute: ActivatedRoute, dialog: MatDialog,) {
-    super(http, BASE_OPTIONS, toast, activatedRoute, dialog)
+  public categoriesService: BaseService<ItemCategory>;
+
+  constructor(http: HttpClient, toast: ToastrService, activatedRoute: ActivatedRoute, dialog: MatDialog,) {
+    super(http, BASE_OPTIONS, toast, activatedRoute, dialog);
+    this.categoriesService = new BaseService<ItemCategory>(http, URLS.CATEGORY);
+    this.getCategories();
+  }
+
+  public getCategories(): void {
+    this.categoriesService.getAll()
+      .subscribe((categories: ItemCategory[]) => {
+        this.categories = categories;
+      });
   }
 
   public createFormGroup(): void {
     this.formGroup = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      date_found: new FormControl('', [Validators.required]),
-      category: new FormControl('', [Validators.required]),
-      city: new FormControl('', [Validators.required]),
+      title: new FormControl(this.object?.title ?? null, [Validators.required]),
+      description: new FormControl(this.object?.description ?? null, [Validators.required]),
+      date_found: new FormControl(this.object?.date_found ?? null, [Validators.required]),
+      category: new FormControl(this.object?.category ?? null, [Validators.required]),
+      city: new FormControl(this.object?.city ?? null, [Validators.required]),
     });
   }
 

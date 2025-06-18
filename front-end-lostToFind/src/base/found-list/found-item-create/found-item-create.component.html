@@ -28,7 +28,7 @@
             <mat-label>Categoria</mat-label>
             <mat-select formControlName="category">
               @for (cat of categories; track cat) {
-                <mat-option [value]="cat.value">{{ cat.label }}</mat-option>
+                <mat-option [value]="cat.id">{{ cat.name }}</mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -46,7 +46,7 @@
 
         </button>
       </form>
-      <app-add-photo-found *ngIf="itemIdEmitter" [id_item_found]="this.object.id"></app-add-photo-found>
+<!--      <app-add-photo-found *ngIf="itemIdEmitter" [id_item_found]="this.object.id"></app-add-photo-found>-->
 
     </div>
 
