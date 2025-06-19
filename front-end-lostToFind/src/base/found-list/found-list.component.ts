@@ -72,7 +72,7 @@ export class FoundItemListComponent implements OnInit {
 
   public search(resetIndex: boolean = false): void {
     this.service.clearParameter();
-    this.service.addParameter('title', this.searchTitle);
+    this.service.addParameter('search', this.searchTitle);
     this.service.addParameter('city', this.searchCity);
 
     if (this.isMined) {
